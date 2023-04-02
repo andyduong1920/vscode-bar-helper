@@ -47,11 +47,11 @@
     "commands": [
       {
         "command": "barHelper.runTestFile",
-        "title": "Bar Helper: 🚀 Run the current test FILE 🚀"
+        "title": "🚀 Run the current test FILE 🚀"
       },
       {
         "command": "barHelper.runTestLine",
-        "title": "Bar Helper: 1️⃣ Run the current test LINE 1️⃣"
+        "title": "1️⃣ Run the current test LINE 1️⃣"
       }
     ]
   },
