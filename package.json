@@ -20,17 +20,40 @@
   "contributes": {
     "configuration": {
       "title": "Bar Helper",
-      "properties": {
-      }
+      "properties": {}
     },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "barHelper.runTestLine",
+          "when": "editorTextFocus",
+          "group": "navigation"
+        },
+        {
+          "command": "barHelper.runTestFile",
+          "when": "editorTextFocus",
+          "group": "navigation"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "barHelper.runTestFile",
+          "when": "explorerResourceIsFolder == false",
+          "group": "navigation"
+        }
+      ]
+    },
+    "keybindings": [
+
+    ],
     "commands": [
       {
         "command": "barHelper.runTestFile",
-        "title": "Bar Helper: Run the current test FILE 🚀"
+        "title": "Bar Helper: 🚀 Run the current test FILE 🚀"
       },
       {
         "command": "barHelper.runTestLine",
-        "title": "Bar Helper: Run the current test LINE 1️⃣"
+        "title": "Bar Helper: 1️⃣ Run the current test LINE 1️⃣"
       }
     ]
   },
@@ -48,8 +71,7 @@
     "glob": "^9.3.4",
     "typescript": "^5.0.3"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "keywords": [
     "bar",
     "helper",
