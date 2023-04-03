@@ -1,3 +1,7 @@
+Run the test from the `Status bar` or `Menu`
+
+![vscode-bar-helper](https://user-images.githubusercontent.com/11751745/229404715-51f1b21e-b30a-4052-8cda-96406979dd26.png)
+
 ### I/ Development
 
 1. Clone the repo
