@@ -75,8 +75,8 @@ const setupItem = (item:any, thisText:any, thisTooltip:any, thisCommand:any) => 
 
 export function activate(context: ExtensionContext) {
   // Adjust here to add more items
-  setupItem(runTestFileItem, "🚀 TEST this FILE 🚀", "Click to run the current test file.", "barHelper.runTestFile");
-  setupItem(runTestLineItem, "1️⃣ TEST this LINE 1️⃣", "Click to run the current test line.", "barHelper.runTestLine");
+  setupItem(runTestFileItem, "🚀 Test FILE (⌃a) 🚀", "Click to run the current test file.", "barHelper.runTestFile");
+  setupItem(runTestLineItem, "1️⃣ Test LINE (⌃z) 1️⃣", "Click to run the current test line.", "barHelper.runTestLine");
 
   const runTestFileCommand = commands.registerCommand(
     "barHelper.runTestFile",

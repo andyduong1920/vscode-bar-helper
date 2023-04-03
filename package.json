@@ -43,7 +43,18 @@
         }
       ]
     },
-    "keybindings": [],
+    "keybindings": [
+      {
+        "key": "ctrl+z",
+        "command": "barHelper.runTestLine",
+        "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+a",
+        "command": "barHelper.runTestFile",
+        "when": "editorTextFocus"
+      }
+    ],
     "commands": [
       {
         "command": "barHelper.runTestFile",
