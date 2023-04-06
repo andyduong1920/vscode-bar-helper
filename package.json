@@ -58,19 +58,27 @@
     "commands": [
       {
         "command": "barHelper.runTestFile",
-        "title": "🚀 Run the current test FILE 🚀"
+        "title": "11111: 🚀 Run the current test FILE 🚀"
       },
       {
         "command": "barHelper.runTestLine",
-        "title": "1️⃣ Run the current test LINE 1️⃣"
+        "title": "11111: 1️⃣ Run the current test LINE 1️⃣"
       },
       {
         "command": "barHelper.runDBRemigrate",
-        "title": "db:drop db:create db:migrate"
+        "title": "11111: 🔧 db:remigrate 🔧"
       },
       {
         "command": "barHelper.runDBSeed",
-        "title": "db:seed"
+        "title": "11111: 🌱 db:seed 🌱"
+      },
+      {
+        "command": "barHelper.startInteractiveConsole",
+        "title": "11111: ⛑️ Start Interactive console ⛑️"
+      },
+      {
+        "command": "barHelper.startWebServer",
+        "title": "11111: 🚁 Start Web server 🚁"
       }
     ]
   },

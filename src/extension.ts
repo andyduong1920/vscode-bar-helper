@@ -8,14 +8,31 @@ import {
   workspace,
 } from "vscode";
 
-const runDBRemigrateItem = window.createStatusBarItem(StatusBarAlignment.Left, -1);
-const runDBSeedItem = window.createStatusBarItem(StatusBarAlignment.Left, -2);
-const runTestFileItem = window.createStatusBarItem(StatusBarAlignment.Left, -3);
-const runTestLineItem = window.createStatusBarItem(StatusBarAlignment.Left, -4);
+const runTestFileItem = window.createStatusBarItem(StatusBarAlignment.Left, -1);
+const runTestLineItem = window.createStatusBarItem(StatusBarAlignment.Left, -2);
+const runDBRemigrateItem = window.createStatusBarItem(
+  StatusBarAlignment.Left,
+  -3
+);
+const runDBSeedItem = window.createStatusBarItem(StatusBarAlignment.Left, -4);
+const startInteractiveConsoleItem = window.createStatusBarItem(
+  StatusBarAlignment.Left,
+  -5
+);
+const startWebServerItem = window.createStatusBarItem(
+  StatusBarAlignment.Left,
+  -6
+);
 
 // Adjust here to add more items
 const TEST_ITEMS = [runTestFileItem, runTestLineItem];
-const BAR_ITEMS = [runDBRemigrateItem, runDBSeedItem, ...TEST_ITEMS];
+const BAR_ITEMS = [
+  runDBRemigrateItem,
+  runDBSeedItem,
+  startInteractiveConsoleItem,
+  startWebServerItem,
+  ...TEST_ITEMS,
+];
 
 const sendToTerminal = (thisText: any) => {
   let terminal = undefined;
@@ -70,8 +87,8 @@ const showTestItems = () => {
   showItems(TEST_ITEMS);
 };
 
-const showItems = (items:any) => {
-  items.forEach((item:any) => {
+const showItems = (items: any) => {
+  items.forEach((item: any) => {
     item.show();
   });
 };
@@ -91,30 +108,47 @@ export function activate(context: ExtensionContext) {
   // Adjust here to add more items
   setupItem(
     runTestFileItem,
-    "🚀 Test FILE (⌃a) 🚀",
+    "🚀 test:FILE (⌃a) 🚀",
     "Click to run the current test file.",
     "barHelper.runTestFile"
   );
   setupItem(
     runTestLineItem,
-    "1️⃣ Test LINE (⌃z) 1️⃣",
+    "1️⃣ test:LINE (⌃z) 1️⃣",
     "Click to run the current test line.",
     "barHelper.runTestLine"
   );
   setupItem(
     runDBRemigrateItem,
-    "🔧 db:remigrate 🔧",
-    "Click to run db:drop db:create db:migrate",
+    "🔧 db:REMIGRATION 🔧",
+    "Click to run db:drop db:create db:migrate.",
     "barHelper.runDBRemigrate"
   );
   setupItem(
     runDBSeedItem,
-    "🌱 db:seed 🌱",
-    "Click to run db:seed",
+    "🌱 db:SEED 🌱",
+    "Click to run db:seed.",
     "barHelper.runDBSeed"
   );
+  setupItem(
+    startInteractiveConsoleItem,
+    "⛑️ console:START ⛑️",
+    "Click to start the interactive console.",
+    "barHelper.startInteractiveConsole"
+  );
+  setupItem(
+    startWebServerItem,
+    "🚁 server:START 🚁",
+    "Click to start the web server.",
+    "barHelper.startWebServer"
+  );
 
-  showItems([runDBRemigrateItem, runDBSeedItem]);
+  showItems([
+    runDBRemigrateItem,
+    runDBSeedItem,
+    startInteractiveConsoleItem,
+    startWebServerItem,
+  ]);
 
   const runTestFileCommand = commands.registerCommand(
     "barHelper.runTestFile",
@@ -161,7 +195,7 @@ export function activate(context: ExtensionContext) {
     "barHelper.runDBRemigrate",
     () => {
       // TODO: Support Elixir
-      sendToTerminal('bundle exec rails db:drop db:create db:migrate');
+      sendToTerminal("bundle exec rails db:drop db:create db:migrate");
     }
   );
 
@@ -169,7 +203,23 @@ export function activate(context: ExtensionContext) {
     "barHelper.runDBSeed",
     () => {
       // TODO: Support Elixir
-      sendToTerminal('bundle exec rails db:seed');
+      sendToTerminal("bundle exec rails db:seed");
+    }
+  );
+
+  const startInteractiveConsoleCommand = commands.registerCommand(
+    "barHelper.startInteractiveConsole",
+    () => {
+      // TODO: Support Elixir
+      sendToTerminal("bundle exec rails console");
+    }
+  );
+
+  const startWebServerCommand = commands.registerCommand(
+    "barHelper.startWebServer",
+    () => {
+      // TODO: Support Elixir
+      sendToTerminal("foreman start -f Procfile.dev");
     }
   );
 
@@ -184,6 +234,8 @@ export function activate(context: ExtensionContext) {
     runTestLineCommand,
     runDBRemigrateCommand,
     runDBSeedCommand,
+    startInteractiveConsoleCommand,
+    startWebServerCommand,
   ]);
 }
 
