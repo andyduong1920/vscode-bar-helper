@@ -14,24 +14,26 @@ const formatCodeFileItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -3
 );
-const runDBRemigrateItem = window.createStatusBarItem(
-  StatusBarAlignment.Left,
-  -4
-);
+const runDBMigrateItem = window.createStatusBarItem(StatusBarAlignment.Left, -4);
 const runDBSeedItem = window.createStatusBarItem(StatusBarAlignment.Left, -5);
-const startInteractiveConsoleItem = window.createStatusBarItem(
+const runDBRemigrateItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -6
 );
-const startWebServerItem = window.createStatusBarItem(
+const startInteractiveConsoleItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -7
+);
+const startWebServerItem = window.createStatusBarItem(
+  StatusBarAlignment.Left,
+  -8
 );
 
 // Adjust here to add more items
 const TEST_ITEMS = [runTestFileItem, runTestLineItem];
 const BAR_ITEMS = [
   runDBRemigrateItem,
+  runDBMigrateItem,
   runDBSeedItem,
   startInteractiveConsoleItem,
   startWebServerItem,
@@ -169,9 +171,16 @@ export function activate(context: ExtensionContext) {
     "Click to format the current file.",
     "barHelper.formatCodeFile"
   );
+  setupItem(
+    runDBMigrateItem,
+    "⬆️ db:MIGRATE (⌃m)",
+    "Click to run the db:migrate.",
+    "barHelper.runDBMigrate"
+  );
 
   showItems([
     runDBRemigrateItem,
+    runDBMigrateItem,
     runDBSeedItem,
     startInteractiveConsoleItem,
     startWebServerItem,
@@ -223,6 +232,14 @@ export function activate(context: ExtensionContext) {
     () => {
       // TODO: Support Elixir
       sendToTerminal("bundle exec rails db:drop db:create db:migrate");
+    }
+  );
+
+  const runDBMigrateCommand = commands.registerCommand(
+    "barHelper.runDBMigrate",
+    () => {
+      // TODO: Support Elixir
+      sendToTerminal("bundle exec rails db:migrate");
     }
   );
 
@@ -283,6 +300,7 @@ export function activate(context: ExtensionContext) {
     runTestFileCommand,
     runTestLineCommand,
     runDBRemigrateCommand,
+    runDBMigrateCommand,
     runDBSeedCommand,
     startInteractiveConsoleCommand,
     startWebServerCommand,
