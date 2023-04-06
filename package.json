@@ -2,7 +2,7 @@
   "name": "bar-helper",
   "displayName": "Bar Helper",
   "description": "Run any command from the status bar.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "publisher": "andyduong1920",
   "repository": {
     "type": "git",
@@ -33,11 +33,21 @@
           "command": "barHelper.runTestFile",
           "when": "editorTextFocus",
           "group": "navigation"
+        },
+        {
+          "command": "barHelper.formatCodeFile",
+          "when": "editorTextFocus",
+          "group": "navigation"
         }
       ],
       "explorer/context": [
         {
           "command": "barHelper.runTestFile",
+          "when": "explorerResourceIsFolder == false",
+          "group": "navigation"
+        },
+        {
+          "command": "barHelper.formatCodeFile",
           "when": "explorerResourceIsFolder == false",
           "group": "navigation"
         }
@@ -53,6 +63,11 @@
         "key": "ctrl+a",
         "command": "barHelper.runTestFile",
         "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+f",
+        "command": "barHelper.formatCodeFile",
+        "when": "editorTextFocus"
       }
     ],
     "commands": [
@@ -66,7 +81,7 @@
       },
       {
         "command": "barHelper.runDBRemigrate",
-        "title": "11111: 🔧 db:remigrate 🔧"
+        "title": "11111: ⭕ db:remigrate ⭕"
       },
       {
         "command": "barHelper.runDBSeed",
@@ -79,6 +94,10 @@
       {
         "command": "barHelper.startWebServer",
         "title": "11111: 🚁 Start Web server 🚁"
+      },
+      {
+        "command": "barHelper.formatCodeFile",
+        "title": "11111: 🎨 Format the current FILE 🎨"
       }
     ]
   },

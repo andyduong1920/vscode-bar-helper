@@ -10,18 +10,22 @@ import {
 
 const runTestFileItem = window.createStatusBarItem(StatusBarAlignment.Left, -1);
 const runTestLineItem = window.createStatusBarItem(StatusBarAlignment.Left, -2);
-const runDBRemigrateItem = window.createStatusBarItem(
+const formatCodeFileItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -3
 );
-const runDBSeedItem = window.createStatusBarItem(StatusBarAlignment.Left, -4);
+const runDBRemigrateItem = window.createStatusBarItem(
+  StatusBarAlignment.Left,
+  -4
+);
+const runDBSeedItem = window.createStatusBarItem(StatusBarAlignment.Left, -5);
 const startInteractiveConsoleItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
-  -5
+  -6
 );
 const startWebServerItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
-  -6
+  -7
 );
 
 // Adjust here to add more items
@@ -31,6 +35,7 @@ const BAR_ITEMS = [
   runDBSeedItem,
   startInteractiveConsoleItem,
   startWebServerItem,
+  formatCodeFileItem,
   ...TEST_ITEMS,
 ];
 
@@ -61,13 +66,29 @@ const isElixirTestFile = (filePath: any) => {
   return filePath.includes("_test.exs");
 };
 
+const isRubyFile = (filePath: any) => {
+  return filePath.includes(".rb");
+};
+
+const isElixirFile = (filePath: any) => {
+  return filePath.includes(".exs") || filePath.includes(".ex");
+};
+
+const isJSFile = (filePath: any) => {
+  return filePath.includes(".js");
+};
+
 const onUpdatePath = () => {
   const editor = window.activeTextEditor;
 
   if (editor === undefined) {
     hideTestItems();
+    formatCodeFileItem.hide();
   } else {
     const filePath = editor.document.fileName;
+
+    // Always show the format item on any file
+    formatCodeFileItem.show();
 
     if (isTestFile(filePath)) {
       showTestItems();
@@ -108,39 +129,45 @@ export function activate(context: ExtensionContext) {
   // Adjust here to add more items
   setupItem(
     runTestFileItem,
-    "🚀 test:FILE (⌃a) 🚀",
+    "🚀 test:FILE (⌃a)",
     "Click to run the current test file.",
     "barHelper.runTestFile"
   );
   setupItem(
     runTestLineItem,
-    "1️⃣ test:LINE (⌃z) 1️⃣",
+    "1️⃣ test:LINE (⌃z)",
     "Click to run the current test line.",
     "barHelper.runTestLine"
   );
   setupItem(
     runDBRemigrateItem,
-    "🔧 db:REMIGRATION 🔧",
+    "⭕ db:REMIGRATION",
     "Click to run db:drop db:create db:migrate.",
     "barHelper.runDBRemigrate"
   );
   setupItem(
     runDBSeedItem,
-    "🌱 db:SEED 🌱",
+    "🌱 db:SEED",
     "Click to run db:seed.",
     "barHelper.runDBSeed"
   );
   setupItem(
     startInteractiveConsoleItem,
-    "⛑️ console:START ⛑️",
+    "⛑️ console:START",
     "Click to start the interactive console.",
     "barHelper.startInteractiveConsole"
   );
   setupItem(
     startWebServerItem,
-    "🚁 server:START 🚁",
+    "🚁 server:START",
     "Click to start the web server.",
     "barHelper.startWebServer"
+  );
+  setupItem(
+    formatCodeFileItem,
+    "🎨 format:FILE (⌃f)",
+    "Click to format the current file.",
+    "barHelper.formatCodeFile"
   );
 
   showItems([
@@ -223,6 +250,29 @@ export function activate(context: ExtensionContext) {
     }
   );
 
+  const formatCodeFileCommand = commands.registerCommand(
+    "barHelper.formatCodeFile",
+    () => {
+      const editor = window.activeTextEditor;
+
+      if (editor === undefined) {
+        return;
+      } else {
+        const filePath = editor.document.fileName;
+        const relativePath = workspace.asRelativePath(filePath, false);
+
+        if (isRubyFile(filePath)) {
+          sendToTerminal(`bundle exec rubocop -a ${relativePath}`);
+        } else if (isElixirFile(filePath)) {
+          sendToTerminal(`mix format ${relativePath}`);
+        } else if (isJSFile(filePath)) {
+          // TODO: Support npm
+          sendToTerminal(`yarn eslint . --color --fix ${relativePath}`);
+        }
+      }
+    }
+  );
+
   onUpdatePath();
 
   const textEditorDisposable = window.onDidChangeActiveTextEditor(onUpdatePath);
@@ -236,6 +286,7 @@ export function activate(context: ExtensionContext) {
     runDBSeedCommand,
     startInteractiveConsoleCommand,
     startWebServerCommand,
+    formatCodeFileCommand,
   ]);
 }
 
