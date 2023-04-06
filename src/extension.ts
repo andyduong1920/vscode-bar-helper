@@ -8,11 +8,14 @@ import {
   workspace,
 } from "vscode";
 
-const runTestFileItem = window.createStatusBarItem(StatusBarAlignment.Left, -1);
-const runTestLineItem = window.createStatusBarItem(StatusBarAlignment.Left, -2);
+const runDBRemigrateItem = window.createStatusBarItem(StatusBarAlignment.Left, -1);
+const runDBSeedItem = window.createStatusBarItem(StatusBarAlignment.Left, -2);
+const runTestFileItem = window.createStatusBarItem(StatusBarAlignment.Left, -3);
+const runTestLineItem = window.createStatusBarItem(StatusBarAlignment.Left, -4);
 
 // Adjust here to add more items
-const ITEMS = [runTestFileItem, runTestLineItem];
+const TEST_ITEMS = [runTestFileItem, runTestLineItem];
+const BAR_ITEMS = [runDBRemigrateItem, runDBSeedItem, ...TEST_ITEMS];
 
 const sendToTerminal = (thisText: any) => {
   let terminal = undefined;
@@ -45,26 +48,30 @@ const onUpdatePath = () => {
   const editor = window.activeTextEditor;
 
   if (editor === undefined) {
-    hideItems();
+    hideTestItems();
   } else {
     const filePath = editor.document.fileName;
 
     if (isTestFile(filePath)) {
-      showItems();
+      showTestItems();
     } else {
-      hideItems();
+      hideTestItems();
     }
   }
 };
 
-const hideItems = () => {
-  ITEMS.forEach((item) => {
+const hideTestItems = () => {
+  TEST_ITEMS.forEach((item) => {
     item.hide();
   });
 };
 
-const showItems = () => {
-  ITEMS.forEach((item) => {
+const showTestItems = () => {
+  showItems(TEST_ITEMS);
+};
+
+const showItems = (items:any) => {
+  items.forEach((item:any) => {
     item.show();
   });
 };
@@ -94,6 +101,20 @@ export function activate(context: ExtensionContext) {
     "Click to run the current test line.",
     "barHelper.runTestLine"
   );
+  setupItem(
+    runDBRemigrateItem,
+    "🔧 db:remigrate 🔧",
+    "Click to run db:drop db:create db:migrate",
+    "barHelper.runDBRemigrate"
+  );
+  setupItem(
+    runDBSeedItem,
+    "🌱 db:seed 🌱",
+    "Click to run db:seed",
+    "barHelper.runDBSeed"
+  );
+
+  showItems([runDBRemigrateItem, runDBSeedItem]);
 
   const runTestFileCommand = commands.registerCommand(
     "barHelper.runTestFile",
@@ -136,6 +157,22 @@ export function activate(context: ExtensionContext) {
     }
   );
 
+  const runDBRemigrateCommand = commands.registerCommand(
+    "barHelper.runDBRemigrate",
+    () => {
+      // TODO: Support Elixir
+      sendToTerminal('bundle exec rails db:drop db:create db:migrate');
+    }
+  );
+
+  const runDBSeedCommand = commands.registerCommand(
+    "barHelper.runDBSeed",
+    () => {
+      // TODO: Support Elixir
+      sendToTerminal('bundle exec rails db:seed');
+    }
+  );
+
   onUpdatePath();
 
   const textEditorDisposable = window.onDidChangeActiveTextEditor(onUpdatePath);
@@ -145,11 +182,13 @@ export function activate(context: ExtensionContext) {
     textEditorDisposable,
     runTestFileCommand,
     runTestLineCommand,
+    runDBRemigrateCommand,
+    runDBSeedCommand,
   ]);
 }
 
 export function deactivate() {
-  ITEMS.forEach((item) => {
+  BAR_ITEMS.forEach((item) => {
     item.dispose();
   });
 }

@@ -2,7 +2,7 @@
   "name": "bar-helper",
   "displayName": "Bar Helper",
   "description": "Run any command from the status bar.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "andyduong1920",
   "repository": {
     "type": "git",
@@ -63,6 +63,14 @@
       {
         "command": "barHelper.runTestLine",
         "title": "1️⃣ Run the current test LINE 1️⃣"
+      },
+      {
+        "command": "barHelper.runDBRemigrate",
+        "title": "db:drop db:create db:migrate"
+      },
+      {
+        "command": "barHelper.runDBSeed",
+        "title": "db:seed"
       }
     ]
   },
