@@ -55,6 +55,10 @@
       {
         "key": "ctrl+i",
         "command": "barHelper.startInteractiveConsole"
+      },
+      {
+        "key": "ctrl+u",
+        "command": "barHelper.runGitPush"
       }
     ],
     "commands": [

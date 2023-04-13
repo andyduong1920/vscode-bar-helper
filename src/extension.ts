@@ -15,19 +15,19 @@ const formatCodeFileItem = window.createStatusBarItem(
   -3
 );
 const runDBMigrateItem = window.createStatusBarItem(StatusBarAlignment.Left, -4);
-const runDBRemigrateItem = window.createStatusBarItem(
+const startInteractiveConsoleItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -5
 );
-const runDBSeedItem = window.createStatusBarItem(StatusBarAlignment.Left, -6);
-const startInteractiveConsoleItem = window.createStatusBarItem(
+const startWebServerItem = window.createStatusBarItem(
+  StatusBarAlignment.Left,
+  -6
+);
+const runDBRemigrateItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -7
 );
-const startWebServerItem = window.createStatusBarItem(
-  StatusBarAlignment.Left,
-  -8
-);
+const runDBSeedItem = window.createStatusBarItem(StatusBarAlignment.Left, -8);
 const gitFetchItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -9
@@ -201,7 +201,7 @@ export function activate(context: ExtensionContext) {
   );
   setupItem(
     gitPushItem,
-    "🚀 PUSH",
+    "🚀⌃u",
     "g push --force",
     "barHelper.runGitPush"
   );
