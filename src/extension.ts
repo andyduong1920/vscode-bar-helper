@@ -28,6 +28,10 @@ const startWebServerItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -8
 );
+const gitPushItem = window.createStatusBarItem(
+  StatusBarAlignment.Left,
+  -9
+);
 
 // Adjust here to add more items
 const TEST_ITEMS = [runTestFileItem, runTestLineItem];
@@ -38,6 +42,7 @@ const BAR_ITEMS = [
   startInteractiveConsoleItem,
   startWebServerItem,
   formatCodeFileItem,
+  gitPushItem,
   ...TEST_ITEMS,
 ];
 
@@ -177,6 +182,12 @@ export function activate(context: ExtensionContext) {
     "Click to run the db:migrate.",
     "barHelper.runDBMigrate"
   );
+  setupItem(
+    gitPushItem,
+    "🚀 git:PUSH",
+    "Click to run git push.",
+    "barHelper.runGitPush"
+  );
 
   showItems([
     runDBRemigrateItem,
@@ -184,6 +195,7 @@ export function activate(context: ExtensionContext) {
     runDBSeedItem,
     startInteractiveConsoleItem,
     startWebServerItem,
+    gitPushItem,
   ]);
 
   const runTestFileCommand = commands.registerCommand(
@@ -290,6 +302,13 @@ export function activate(context: ExtensionContext) {
     }
   );
 
+  const runGitPushCommand = commands.registerCommand(
+    "barHelper.runGitPush",
+    () => {
+      sendToTerminal("ggpush -f");
+    }
+  );
+
   onUpdatePath();
 
   const textEditorDisposable = window.onDidChangeActiveTextEditor(onUpdatePath);
@@ -305,6 +324,7 @@ export function activate(context: ExtensionContext) {
     startInteractiveConsoleCommand,
     startWebServerCommand,
     formatCodeFileCommand,
+    runGitPushCommand,
   ]);
 }
 

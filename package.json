@@ -25,30 +25,15 @@
     "menus": {
       "editor/context": [
         {
-          "command": "barHelper.runTestLine",
-          "when": "editorTextFocus",
-          "group": "navigation"
-        },
-        {
-          "command": "barHelper.runTestFile",
-          "when": "editorTextFocus",
-          "group": "navigation"
-        },
-        {
-          "command": "barHelper.formatCodeFile",
+          "command": "barHelper.runGitPush",
           "when": "editorTextFocus",
           "group": "navigation"
         }
       ],
       "explorer/context": [
         {
-          "command": "barHelper.runTestFile",
-          "when": "explorerResourceIsFolder == false",
-          "group": "navigation"
-        },
-        {
-          "command": "barHelper.formatCodeFile",
-          "when": "explorerResourceIsFolder == false",
+          "command": "barHelper.runGitPush",
+          "when": "explorerResourceIsFolder == true",
           "group": "navigation"
         }
       ]
@@ -106,6 +91,10 @@
       {
         "command": "barHelper.formatCodeFile",
         "title": "11111: 🎨 Format the current FILE 🎨"
+      },
+      {
+        "command": "barHelper.runGitPush",
+        "title": "11111: 🚀 Git PUSH 🚀"
       }
     ]
   },
