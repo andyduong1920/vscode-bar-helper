@@ -62,7 +62,7 @@
     "commands": [
       {
         "command": "barHelper.runTestFile",
-        "title": "11111: 🚀 Run the current test FILE 🚀"
+        "title": "11111: 🔥 Run the current test FILE 🔥"
       },
       {
         "command": "barHelper.runTestLine",

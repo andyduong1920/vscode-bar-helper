@@ -136,7 +136,7 @@ export function activate(context: ExtensionContext) {
   // Adjust here to add more items
   setupItem(
     runTestFileItem,
-    "🚀 test:FILE (⌃a)",
+    "🔥 test:FILE (⌃a)",
     "Click to run the current test file.",
     "barHelper.runTestFile"
   );
