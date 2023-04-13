@@ -24,18 +24,8 @@
     },
     "menus": {
       "editor/context": [
-        {
-          "command": "barHelper.runGitPush",
-          "when": "editorTextFocus",
-          "group": "navigation"
-        }
       ],
       "explorer/context": [
-        {
-          "command": "barHelper.runGitPush",
-          "when": "explorerResourceIsFolder == true",
-          "group": "navigation"
-        }
       ]
     },
     "keybindings": [
@@ -57,6 +47,14 @@
       {
         "key": "ctrl+m",
         "command": "barHelper.runDBMigrate"
+      },
+      {
+        "key": "ctrl+s",
+        "command": "barHelper.startWebServer"
+      },
+      {
+        "key": "ctrl+i",
+        "command": "barHelper.startInteractiveConsole"
       }
     ],
     "commands": [
@@ -95,6 +93,14 @@
       {
         "command": "barHelper.runGitPush",
         "title": "11111: 🚀 Git PUSH 🚀"
+      },
+      {
+        "command": "barHelper.runGitRebaseContinue",
+        "title": "11111: 🏃 Git rebase CONTINUE 🏃"
+      },
+      {
+        "command": "barHelper.runGitRebaseSkip",
+        "title": "11111: 👋 Git rebase SKIP 👋"
       }
     ]
   },

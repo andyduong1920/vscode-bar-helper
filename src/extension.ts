@@ -15,11 +15,11 @@ const formatCodeFileItem = window.createStatusBarItem(
   -3
 );
 const runDBMigrateItem = window.createStatusBarItem(StatusBarAlignment.Left, -4);
-const runDBSeedItem = window.createStatusBarItem(StatusBarAlignment.Left, -5);
 const runDBRemigrateItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
-  -6
+  -5
 );
+const runDBSeedItem = window.createStatusBarItem(StatusBarAlignment.Left, -6);
 const startInteractiveConsoleItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -7
@@ -28,9 +28,23 @@ const startWebServerItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -8
 );
-const gitPushItem = window.createStatusBarItem(
+const gitFetchItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -9
+);
+const gitPushItem = window.createStatusBarItem(
+  StatusBarAlignment.Left,
+  -10
+);
+
+// Right side
+const gitRebaseSkipItem = window.createStatusBarItem(
+  StatusBarAlignment.Right,
+  1
+);
+const gitRebaseContinueItem = window.createStatusBarItem(
+  StatusBarAlignment.Right,
+  2
 );
 
 // Adjust here to add more items
@@ -43,16 +57,19 @@ const BAR_ITEMS = [
   startWebServerItem,
   formatCodeFileItem,
   gitPushItem,
+  gitFetchItem,
+  gitRebaseContinueItem,
+  gitRebaseSkipItem,
   ...TEST_ITEMS,
 ];
 
-const sendToTerminal = (thisText: any) => {
+const sendToTerminal = (thisText: string) => {
   let terminal = undefined;
 
   if (window.activeTerminal) {
     terminal = window.activeTerminal;
   } else {
-    terminal = window.createTerminal("Test Runner");
+    terminal = window.createTerminal("Bar Helper");
   }
 
   terminal.show();
@@ -136,57 +153,75 @@ export function activate(context: ExtensionContext) {
   // Adjust here to add more items
   setupItem(
     runTestFileItem,
-    "🔥 test:FILE (⌃a)",
-    "Click to run the current test file.",
+    "🔥⌃a",
+    "Test file",
     "barHelper.runTestFile"
   );
   setupItem(
     runTestLineItem,
-    "1️⃣ test:LINE (⌃z)",
-    "Click to run the current test line.",
+    "1️⃣ ⌃z",
+    "Test line",
     "barHelper.runTestLine"
   );
   setupItem(
     runDBRemigrateItem,
-    "⭕ db:REMIGRATION",
-    "Click to run db:drop db:create db:migrate.",
+    "⭕ reMIGRATION",
+    "db:drop db:create db:migrate.",
     "barHelper.runDBRemigrate"
   );
   setupItem(
     runDBSeedItem,
-    "🌱 db:SEED",
-    "Click to run db:seed.",
+    "🌱 SEED",
+    "db:seed.",
     "barHelper.runDBSeed"
   );
   setupItem(
     startInteractiveConsoleItem,
-    "⛑️ console:START",
+    "⛑️⌃i",
     "Click to start the interactive console.",
     "barHelper.startInteractiveConsole"
   );
   setupItem(
     startWebServerItem,
-    "🚁 server:START",
+    "🚁⌃s",
     "Click to start the web server.",
     "barHelper.startWebServer"
   );
   setupItem(
     formatCodeFileItem,
-    "🎨 format:FILE (⌃f)",
-    "Click to format the current file.",
+    "🎨 ⌃f",
+    "format",
     "barHelper.formatCodeFile"
   );
   setupItem(
     runDBMigrateItem,
-    "⬆️ db:MIGRATE (⌃m)",
-    "Click to run the db:migrate.",
+    "⬆️ ⌃m",
+    "db:migrate.",
     "barHelper.runDBMigrate"
   );
   setupItem(
     gitPushItem,
-    "🚀 git:PUSH",
-    "Click to run git push.",
+    "🚀 PUSH",
+    "g push --force",
     "barHelper.runGitPush"
+  );
+  setupItem(
+    gitFetchItem,
+    "⏬ FETCH",
+    "g fetch.",
+    "git.fetch"
+  );
+  setupItem(
+    gitRebaseContinueItem,
+    "🏃 rebase:CONTINUE",
+    "g add . && g rebase --continue.",
+    "barHelper.runGitRebaseContinue"
+  );
+  setupItem(
+    gitRebaseSkipItem,
+    "👋 rebase:SKIP",
+    "g rebase --skip.",
+    "barHelper.runGitRebaseSkip"
   );
 
   showItems([
@@ -196,6 +231,9 @@ export function activate(context: ExtensionContext) {
     startInteractiveConsoleItem,
     startWebServerItem,
     gitPushItem,
+    gitFetchItem,
+    gitRebaseContinueItem,
+    gitRebaseSkipItem
   ]);
 
   const runTestFileCommand = commands.registerCommand(
@@ -309,6 +347,20 @@ export function activate(context: ExtensionContext) {
     }
   );
 
+  const runGitRebaseContinueCommand = commands.registerCommand(
+    "barHelper.runGitRebaseContinue",
+    () => {
+      sendToTerminal("ga . && g rebase --continue");
+    }
+  );
+
+  const runGitRebaseSkipCommand = commands.registerCommand(
+    "barHelper.runGitRebaseSkip",
+    () => {
+      sendToTerminal("g rebase --skip");
+    }
+  );
+
   onUpdatePath();
 
   const textEditorDisposable = window.onDidChangeActiveTextEditor(onUpdatePath);
@@ -325,6 +377,8 @@ export function activate(context: ExtensionContext) {
     startWebServerCommand,
     formatCodeFileCommand,
     runGitPushCommand,
+    runGitRebaseContinueCommand,
+    runGitRebaseSkipCommand,
   ]);
 }
 
