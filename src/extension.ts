@@ -27,7 +27,6 @@ const runDBRemigrateItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -7
 );
-const runDBSeedItem = window.createStatusBarItem(StatusBarAlignment.Left, -8);
 const gitFetchItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -9
@@ -52,7 +51,6 @@ const TEST_ITEMS = [runTestFileItem, runTestLineItem];
 const BAR_ITEMS = [
   runDBRemigrateItem,
   runDBMigrateItem,
-  runDBSeedItem,
   startInteractiveConsoleItem,
   startWebServerItem,
   formatCodeFileItem,
@@ -166,68 +164,61 @@ export function activate(context: ExtensionContext) {
   setupItem(
     runDBRemigrateItem,
     "⭕ reMIGRATION",
-    "db:drop db:create db:migrate.",
+    "db:drop db:create db:migrate && db:seed",
     "barHelper.runDBRemigrate"
-  );
-  setupItem(
-    runDBSeedItem,
-    "🌱 SEED",
-    "db:seed.",
-    "barHelper.runDBSeed"
   );
   setupItem(
     startInteractiveConsoleItem,
     "⛑️⌃i",
-    "Click to start the interactive console.",
+    "Start the interactive console",
     "barHelper.startInteractiveConsole"
   );
   setupItem(
     startWebServerItem,
     "🚁⌃s",
-    "Click to start the web server.",
+    "Start the web server",
     "barHelper.startWebServer"
   );
   setupItem(
     formatCodeFileItem,
     "🎨 ⌃f",
-    "format",
+    "format the file",
     "barHelper.formatCodeFile"
   );
   setupItem(
     runDBMigrateItem,
     "⬆️ ⌃m",
-    "db:migrate.",
+    "db:migrate",
     "barHelper.runDBMigrate"
   );
   setupItem(
     gitPushItem,
     "🚀⌃u",
-    "g push --force",
+    "git push --force",
     "barHelper.runGitPush"
   );
   setupItem(
     gitFetchItem,
     "⏬ FETCH",
-    "g fetch.",
+    "git fetch.",
     "git.fetch"
   );
   setupItem(
     gitRebaseContinueItem,
     "🏃 rebase:CONTINUE",
-    "g add . && g rebase --continue.",
+    "git add . && git rebase --continue.",
     "barHelper.runGitRebaseContinue"
   );
   setupItem(
     gitRebaseSkipItem,
     "👋 rebase:SKIP",
-    "g rebase --skip.",
+    "git rebase --skip.",
     "barHelper.runGitRebaseSkip"
   );
 
   showItems([
     runDBRemigrateItem,
     runDBMigrateItem,
-    runDBSeedItem,
     startInteractiveConsoleItem,
     startWebServerItem,
     gitPushItem,
@@ -281,7 +272,7 @@ export function activate(context: ExtensionContext) {
     "barHelper.runDBRemigrate",
     () => {
       // TODO: Support Elixir
-      sendToTerminal("bundle exec rails db:drop db:create db:migrate");
+      sendToTerminal("bundle exec rails db:drop db:create db:migrate && bundle exec rails db:seed");
     }
   );
 
@@ -290,14 +281,6 @@ export function activate(context: ExtensionContext) {
     () => {
       // TODO: Support Elixir
       sendToTerminal("bundle exec rails db:migrate");
-    }
-  );
-
-  const runDBSeedCommand = commands.registerCommand(
-    "barHelper.runDBSeed",
-    () => {
-      // TODO: Support Elixir
-      sendToTerminal("bundle exec rails db:seed");
     }
   );
 
@@ -372,7 +355,6 @@ export function activate(context: ExtensionContext) {
     runTestLineCommand,
     runDBRemigrateCommand,
     runDBMigrateCommand,
-    runDBSeedCommand,
     startInteractiveConsoleCommand,
     startWebServerCommand,
     formatCodeFileCommand,

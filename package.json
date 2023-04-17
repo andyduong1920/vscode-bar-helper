@@ -79,10 +79,6 @@
         "title": "11111: ⬆️ db:migrate ⬆️"
       },
       {
-        "command": "barHelper.runDBSeed",
-        "title": "11111: 🌱 db:seed 🌱"
-      },
-      {
         "command": "barHelper.startInteractiveConsole",
         "title": "11111: ⛑️ Start Interactive console ⛑️"
       },
