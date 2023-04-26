@@ -317,7 +317,7 @@ export function activate(context: ExtensionContext) {
           sendToTerminal(`mix format ${relativePath}`);
         } else if (isJSFile(filePath)) {
           // TODO: Support npm
-          sendToTerminal(`yarn eslint . --color --fix ${relativePath}`);
+          sendToTerminal(`yarn eslint --color --fix ${relativePath}`);
         }
       }
     }
