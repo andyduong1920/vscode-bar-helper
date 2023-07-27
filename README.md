@@ -11,5 +11,4 @@ Run the test from the `Status bar` or `Menu`
 
 ### II/ Use
 
-1. Download the `vsix` file from https://github.com/andyduong1920/vscode-bar-helper/releases/tag/0.4.0
-2. `code --install-extension bar-helper-0.4.0.vsix`
+1. Install it on [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=andyduong1920.bar-helper)
