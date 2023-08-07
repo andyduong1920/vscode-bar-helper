@@ -12,3 +12,8 @@ install:
 	rm bar-helper-0.4.0.vsix
 
 package_and_install: compile package install
+
+compile_and_package: compile package
+
+publish:
+	vsce publish

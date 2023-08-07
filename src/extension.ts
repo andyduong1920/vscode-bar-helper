@@ -14,7 +14,10 @@ const formatCodeFileItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -3
 );
-const runDBMigrateItem = window.createStatusBarItem(StatusBarAlignment.Left, -4);
+const runDBMigrateItem = window.createStatusBarItem(
+  StatusBarAlignment.Left,
+  -4
+);
 const startInteractiveConsoleItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -5
@@ -27,14 +30,8 @@ const runDBRemigrateItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -7
 );
-const gitFetchItem = window.createStatusBarItem(
-  StatusBarAlignment.Left,
-  -9
-);
-const gitPushItem = window.createStatusBarItem(
-  StatusBarAlignment.Left,
-  -10
-);
+const gitFetchItem = window.createStatusBarItem(StatusBarAlignment.Left, -9);
+const gitPushItem = window.createStatusBarItem(StatusBarAlignment.Left, -10);
 
 // Right side
 const gitRebaseSkipItem = window.createStatusBarItem(
@@ -149,18 +146,8 @@ const setupItem = (
 
 export function activate(context: ExtensionContext) {
   // Adjust here to add more items
-  setupItem(
-    runTestFileItem,
-    "🔥⌃a",
-    "Test file",
-    "barHelper.runTestFile"
-  );
-  setupItem(
-    runTestLineItem,
-    "1️⃣ ⌃z",
-    "Test line",
-    "barHelper.runTestLine"
-  );
+  setupItem(runTestFileItem, "🔥⌃a", "Test file", "barHelper.runTestFile");
+  setupItem(runTestLineItem, "1️⃣ ⌃z", "Test line", "barHelper.runTestLine");
   setupItem(
     runDBRemigrateItem,
     "⭕ reMIGRATION",
@@ -185,24 +172,9 @@ export function activate(context: ExtensionContext) {
     "format the file",
     "barHelper.formatCodeFile"
   );
-  setupItem(
-    runDBMigrateItem,
-    "⬆️ ⌃m",
-    "db:migrate",
-    "barHelper.runDBMigrate"
-  );
-  setupItem(
-    gitPushItem,
-    "🚀⌃u",
-    "git push --force",
-    "barHelper.runGitPush"
-  );
-  setupItem(
-    gitFetchItem,
-    "⏬ FETCH",
-    "git fetch.",
-    "git.fetch"
-  );
+  setupItem(runDBMigrateItem, "⬆️ ⌃m", "db:migrate", "barHelper.runDBMigrate");
+  setupItem(gitPushItem, "🚀⌃u", "git push --force", "barHelper.runGitPush");
+  setupItem(gitFetchItem, "⏬ FETCH", "git fetch.", "git.fetch");
   setupItem(
     gitRebaseContinueItem,
     "🏃 rebase:CONTINUE",
@@ -224,7 +196,7 @@ export function activate(context: ExtensionContext) {
     gitPushItem,
     gitFetchItem,
     gitRebaseContinueItem,
-    gitRebaseSkipItem
+    gitRebaseSkipItem,
   ]);
 
   const runTestFileCommand = commands.registerCommand(
@@ -272,7 +244,9 @@ export function activate(context: ExtensionContext) {
     "barHelper.runDBRemigrate",
     () => {
       // TODO: Support Elixir
-      sendToTerminal("bundle exec rails db:drop db:create db:migrate && bundle exec rails db:seed");
+      sendToTerminal(
+        "bin/rails db:environment:set RAILS_ENV=development && bin/rails db:drop db:setup"
+      );
     }
   );
 

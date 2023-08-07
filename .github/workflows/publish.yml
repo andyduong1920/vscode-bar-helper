@@ -1,0 +1,25 @@
+name: Publish
+
+on:
+  push:
+  workflow_dispatch:
+
+env:
+  DOCKER_REGISTRY_HOST: ${{ secrets.HEROKU_REGISTRY_HOST }}
+  DOCKER_IMAGE: ${{ github.repository }}
+  DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
+  HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+  PHRASE_CLI_VERSION: "2.5.0"
+  PHRASE_ACCESS_TOKEN: ${{ secrets.PHRASE_ACCESS_TOKEN }}
+
+jobs:
+  deploy:
+    name: Deploy the application to Heroku
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.workflow_run.head_branch || github.ref }}
+
+      -

@@ -12,3 +12,8 @@ Run the test from the `Status bar` or `Menu`
 ### II/ Use
 
 1. Install it on [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=andyduong1920.bar-helper)
+
+### III/ Publish
+
+1. Run `make compile_and_package`
+2. Run `make publish`
