@@ -8,6 +8,8 @@ import {
   workspace,
 } from "vscode";
 
+import * as Helpers from "./helpers";
+
 const runTestFileItem = window.createStatusBarItem(StatusBarAlignment.Left, -1);
 const runTestLineItem = window.createStatusBarItem(StatusBarAlignment.Left, -2);
 const formatCodeFileItem = window.createStatusBarItem(
@@ -58,45 +60,6 @@ const BAR_ITEMS = [
   ...TEST_ITEMS,
 ];
 
-const sendToTerminal = (thisText: string) => {
-  let terminal = undefined;
-
-  if (window.activeTerminal) {
-    terminal = window.activeTerminal;
-  } else {
-    terminal = window.createTerminal("Bar Helper");
-  }
-
-  terminal.show();
-
-  terminal.sendText(thisText);
-};
-
-// Adjust here to add more items
-const isTestFile = (filePath: any) => {
-  return isRubyTestFile(filePath) || isElixirTestFile(filePath);
-};
-
-const isRubyTestFile = (filePath: any) => {
-  return filePath.includes("_spec.rb");
-};
-
-const isElixirTestFile = (filePath: any) => {
-  return filePath.includes("_test.exs");
-};
-
-const isRubyFile = (filePath: any) => {
-  return filePath.includes(".rb");
-};
-
-const isElixirFile = (filePath: any) => {
-  return filePath.includes(".exs") || filePath.includes(".ex");
-};
-
-const isJSFile = (filePath: any) => {
-  return filePath.includes(".js");
-};
-
 const onUpdatePath = () => {
   const editor = window.activeTextEditor;
 
@@ -109,7 +72,7 @@ const onUpdatePath = () => {
     // Always show the format item on any file
     formatCodeFileItem.show();
 
-    if (isTestFile(filePath)) {
+    if (Helpers.isTestFile(filePath)) {
       showTestItems();
     } else {
       hideTestItems();
@@ -210,10 +173,10 @@ export function activate(context: ExtensionContext) {
         const filePath = editor.document.fileName;
         const relativePath = workspace.asRelativePath(filePath, false);
 
-        if (isRubyTestFile(filePath)) {
-          sendToTerminal(`bundle exec rspec ${relativePath}`);
-        } else if (isElixirTestFile(filePath)) {
-          sendToTerminal(`mix test ${relativePath}`);
+        if (Helpers.isRubyTestFile(filePath)) {
+          Helpers.sendToTerminal(`bundle exec rspec ${relativePath}`);
+        } else if (Helpers.isElixirTestFile(filePath)) {
+          Helpers.sendToTerminal(`mix test ${relativePath}`);
         }
       }
     }
@@ -231,10 +194,12 @@ export function activate(context: ExtensionContext) {
         const relativePath = workspace.asRelativePath(filePath, false);
         const lineNumber = editor.selection.active.line + 1;
 
-        if (isRubyTestFile(filePath)) {
-          sendToTerminal(`bundle exec rspec ${relativePath}:${lineNumber}`);
-        } else if (isElixirTestFile(filePath)) {
-          sendToTerminal(`mix test ${relativePath}:${lineNumber}`);
+        if (Helpers.isRubyTestFile(filePath)) {
+          Helpers.sendToTerminal(
+            `bundle exec rspec ${relativePath}:${lineNumber}`
+          );
+        } else if (Helpers.isElixirTestFile(filePath)) {
+          Helpers.sendToTerminal(`mix test ${relativePath}:${lineNumber}`);
         }
       }
     }
@@ -244,7 +209,7 @@ export function activate(context: ExtensionContext) {
     "barHelper.runDBRemigrate",
     () => {
       // TODO: Support Elixir
-      sendToTerminal(
+      Helpers.sendToTerminal(
         "bin/rails db:environment:set RAILS_ENV=development && bin/rails db:drop db:setup"
       );
     }
@@ -254,7 +219,7 @@ export function activate(context: ExtensionContext) {
     "barHelper.runDBMigrate",
     () => {
       // TODO: Support Elixir
-      sendToTerminal("bundle exec rails db:migrate");
+      Helpers.sendToTerminal("bundle exec rails db:migrate");
     }
   );
 
@@ -262,7 +227,7 @@ export function activate(context: ExtensionContext) {
     "barHelper.startInteractiveConsole",
     () => {
       // TODO: Support Elixir
-      sendToTerminal("bundle exec rails console");
+      Helpers.sendToTerminal("bundle exec rails console");
     }
   );
 
@@ -270,7 +235,7 @@ export function activate(context: ExtensionContext) {
     "barHelper.startWebServer",
     () => {
       // TODO: Support Elixir
-      sendToTerminal("foreman start -f Procfile.dev");
+      Helpers.sendToTerminal("foreman start -f Procfile.dev");
     }
   );
 
@@ -285,13 +250,13 @@ export function activate(context: ExtensionContext) {
         const filePath = editor.document.fileName;
         const relativePath = workspace.asRelativePath(filePath, false);
 
-        if (isRubyFile(filePath)) {
-          sendToTerminal(`bundle exec rubocop -a ${relativePath}`);
-        } else if (isElixirFile(filePath)) {
-          sendToTerminal(`mix format ${relativePath}`);
-        } else if (isJSFile(filePath)) {
+        if (Helpers.isRubyFile(filePath)) {
+          Helpers.sendToTerminal(`bundle exec rubocop -a ${relativePath}`);
+        } else if (Helpers.isElixirFile(filePath)) {
+          Helpers.sendToTerminal(`mix format ${relativePath}`);
+        } else if (Helpers.isJSFile(filePath)) {
           // TODO: Support npm
-          sendToTerminal(`yarn eslint --color --fix ${relativePath}`);
+          Helpers.sendToTerminal(`yarn eslint --color --fix ${relativePath}`);
         }
       }
     }
@@ -300,21 +265,21 @@ export function activate(context: ExtensionContext) {
   const runGitPushCommand = commands.registerCommand(
     "barHelper.runGitPush",
     () => {
-      sendToTerminal("ggpush -f");
+      Helpers.sendToTerminal("ggpush -f");
     }
   );
 
   const runGitRebaseContinueCommand = commands.registerCommand(
     "barHelper.runGitRebaseContinue",
     () => {
-      sendToTerminal("ga . && g rebase --continue");
+      Helpers.sendToTerminal("ga . && g rebase --continue");
     }
   );
 
   const runGitRebaseSkipCommand = commands.registerCommand(
     "barHelper.runGitRebaseSkip",
     () => {
-      sendToTerminal("g rebase --skip");
+      Helpers.sendToTerminal("g rebase --skip");
     }
   );
 
