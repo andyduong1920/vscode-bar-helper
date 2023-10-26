@@ -2,7 +2,7 @@
   "name": "bar-helper",
   "displayName": "Bar Helper",
   "description": "Run any command from the status bar.",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "publisher": "andyduong1920",
   "repository": {
     "type": "git",

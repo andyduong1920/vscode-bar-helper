@@ -8,8 +8,8 @@ package:
 	printf "Y\n" | vsce package
 
 install:
-	code --install-extension bar-helper-0.5.1.vsix
-	rm bar-helper-0.5.1.vsix
+	code --install-extension bar-helper-0.5.2.vsix
+	rm bar-helper-0.5.2.vsix
 
 package_and_install: compile package install
 
