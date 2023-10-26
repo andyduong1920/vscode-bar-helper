@@ -12,7 +12,7 @@ Install it on [VSCode Marketplace](https://marketplace.visualstudio.com/items?it
 4. Run `make package_and_install`
 5. Test on VSCode
 
-### III/ Add new Item
+### II/ Add new Item
 1. Define the bar item in `src/editableArea/1_definitions.ts`
 2. Make it as default show by adding it to `src/editableArea/2_defaultShow.ts`
 3. Define the command in `src/editableArea/3_commands.ts`
@@ -20,6 +20,6 @@ Install it on [VSCode Marketplace](https://marketplace.visualstudio.com/items?it
 5. Update the `src/editableArea/5_customShow.ts` to modify the Items per file Type, for example display only for Test files.
 6. Edit the `package.json` to add the new command to the `contributes.commands` and `contributes.keybindings` sections
 
-### II/ Publish
+### III/ Publish
 
 - Trigger the [publish workflow](https://github.com/andyduong1920/vscode-bar-helper/actions/workflows/publish.yml) on Github Actions.
