@@ -1,76 +1,21 @@
 "use strict";
 
-import {
-  commands,
-  window,
-  ExtensionContext,
-  StatusBarAlignment,
-  workspace,
-} from "vscode";
+import { commands, window, ExtensionContext, workspace } from "vscode";
 
 import * as Helpers from "./helpers";
-
-const runTestFileItem = window.createStatusBarItem(StatusBarAlignment.Left, -1);
-const runTestLineItem = window.createStatusBarItem(StatusBarAlignment.Left, -2);
-const formatCodeFileItem = window.createStatusBarItem(
-  StatusBarAlignment.Left,
-  -3
-);
-const runDBMigrateItem = window.createStatusBarItem(
-  StatusBarAlignment.Left,
-  -4
-);
-const startInteractiveConsoleItem = window.createStatusBarItem(
-  StatusBarAlignment.Left,
-  -5
-);
-const startWebServerItem = window.createStatusBarItem(
-  StatusBarAlignment.Left,
-  -6
-);
-const runDBRemigrateItem = window.createStatusBarItem(
-  StatusBarAlignment.Left,
-  -7
-);
-const gitFetchItem = window.createStatusBarItem(StatusBarAlignment.Left, -9);
-const gitPushItem = window.createStatusBarItem(StatusBarAlignment.Left, -10);
-
-// Right side
-const gitRebaseSkipItem = window.createStatusBarItem(
-  StatusBarAlignment.Right,
-  1
-);
-const gitRebaseContinueItem = window.createStatusBarItem(
-  StatusBarAlignment.Right,
-  2
-);
-
-// Adjust here to add more items
-const TEST_ITEMS = [runTestFileItem, runTestLineItem];
-const BAR_ITEMS = [
-  runDBRemigrateItem,
-  runDBMigrateItem,
-  startInteractiveConsoleItem,
-  startWebServerItem,
-  formatCodeFileItem,
-  gitPushItem,
-  gitFetchItem,
-  gitRebaseContinueItem,
-  gitRebaseSkipItem,
-  ...TEST_ITEMS,
-];
+import * as Items from "./items";
 
 const onUpdatePath = () => {
   const editor = window.activeTextEditor;
 
   if (editor === undefined) {
     hideTestItems();
-    formatCodeFileItem.hide();
+    Items.formatCodeFileItem.hide();
   } else {
     const filePath = editor.document.fileName;
 
     // Always show the format item on any file
-    formatCodeFileItem.show();
+    Items.formatCodeFileItem.show();
 
     if (Helpers.isTestFile(filePath)) {
       showTestItems();
@@ -81,88 +26,88 @@ const onUpdatePath = () => {
 };
 
 const hideTestItems = () => {
-  TEST_ITEMS.forEach((item) => {
+  Items.TEST_ITEMS.forEach((item) => {
     item.hide();
   });
 };
 
 const showTestItems = () => {
-  Helpers.showItems(TEST_ITEMS);
+  Helpers.showItems(Items.TEST_ITEMS);
 };
 
 export function activate(context: ExtensionContext) {
   // Adjust here to add more items
   Helpers.setupItem(
-    runTestFileItem,
+    Items.runTestFileItem,
     "🔥⌃a",
     "Test file",
     "barHelper.runTestFile"
   );
   Helpers.setupItem(
-    runTestLineItem,
+    Items.runTestLineItem,
     "1️⃣ ⌃z",
     "Test line",
     "barHelper.runTestLine"
   );
   Helpers.setupItem(
-    runDBRemigrateItem,
+    Items.runDBRemigrateItem,
     "⭕ reMIGRATION",
     "db:drop db:create db:migrate && db:seed",
     "barHelper.runDBRemigrate"
   );
   Helpers.setupItem(
-    startInteractiveConsoleItem,
+    Items.startInteractiveConsoleItem,
     "⛑️⌃i",
     "Start the interactive console",
     "barHelper.startInteractiveConsole"
   );
   Helpers.setupItem(
-    startWebServerItem,
+    Items.startWebServerItem,
     "🚁⌃s",
     "Start the web server",
     "barHelper.startWebServer"
   );
   Helpers.setupItem(
-    formatCodeFileItem,
+    Items.formatCodeFileItem,
     "🎨 ⌃f",
     "format the file",
     "barHelper.formatCodeFile"
   );
   Helpers.setupItem(
-    runDBMigrateItem,
+    Items.runDBMigrateItem,
     "⬆️ ⌃m",
     "db:migrate",
     "barHelper.runDBMigrate"
   );
   Helpers.setupItem(
-    gitPushItem,
+    Items.gitPushItem,
     "🚀⌃u",
     "git push --force",
     "barHelper.runGitPush"
   );
-  Helpers.setupItem(gitFetchItem, "⏬ FETCH", "git fetch.", "git.fetch");
+  Helpers.setupItem(Items.gitFetchItem, "⏬ FETCH", "git fetch.", "git.fetch");
   Helpers.setupItem(
-    gitRebaseContinueItem,
+    Items.gitRebaseContinueItem,
     "🏃 rebase:CONTINUE",
     "git add . && git rebase --continue.",
     "barHelper.runGitRebaseContinue"
   );
   Helpers.setupItem(
-    gitRebaseSkipItem,
+    Items.gitRebaseSkipItem,
     "👋 rebase:SKIP",
     "git rebase --skip.",
     "barHelper.runGitRebaseSkip"
   );
 
   Helpers.showItems([
-    runDBRemigrateItem,
-    runDBMigrateItem,
-    startInteractiveConsoleItem,
-    startWebServerItem,
-    gitPushItem,
-    gitFetchItem,
-    gitRebaseContinueItem,
-    gitRebaseSkipItem,
+    Items.runDBRemigrateItem,
+    Items.runDBMigrateItem,
+    Items.startInteractiveConsoleItem,
+    Items.startWebServerItem,
+    Items.gitPushItem,
+    Items.gitFetchItem,
+    Items.gitRebaseContinueItem,
+    Items.gitRebaseSkipItem,
   ]);
 
   const runTestFileCommand = commands.registerCommand(
@@ -307,7 +252,7 @@ export function activate(context: ExtensionContext) {
 }
 
 export function deactivate() {
-  BAR_ITEMS.forEach((item) => {
+  Items.BAR_ITEMS.forEach((item) => {
     item.dispose();
   });
 }
