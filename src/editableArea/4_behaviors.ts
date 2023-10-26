@@ -58,10 +58,10 @@ export const setupItemBehaviors = () => {
     "barHelper.runGitStatus"
   );
   Utils.setupItem(
-    BarItems.gitCheckoutDevelopPullAndFetchItem,
-    "⏬ checkout:develop - pull - fetch",
-    "git checkout to develop and then pull and fetch",
-    "barHelper.runGitCheckoutDevelopPullAndFetchItem"
+    BarItems.gitCheckoutDevelopPullItem,
+    "⏬ checkout:develop - pull",
+    "git checkout to develop and then pull",
+    "barHelper.runGitCheckoutDevelopPull"
   );
 
   // Right side
