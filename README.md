@@ -16,8 +16,15 @@ Run the test from the `Status bar` or `Menu`
 
 ### III/ Publish
 
-1. Run `make compile_and_package`
-2. Run `make publish`
+- Generate the VSCE_TOKEN on https://dev.azure.com/andyduong1920/_usersSettings/tokens.
+
+1. On Github Action
+- Update the secret on Github Action.
+- Trigger the `publish` workflow.
+
+2. On Local
+- Run `make compile_and_package`
+- Run `make publish`
 
 ### IV/ Add new Item
 1. Define the bar item in `src/editableArea/1_definitions.ts`
