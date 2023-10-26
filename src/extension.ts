@@ -4,7 +4,8 @@ import { commands, window, ExtensionContext, workspace } from "vscode";
 
 import * as FileCheckHelpers from "./fileCheckHelpers";
 import * as BarItems from "./barItems/definition";
-import { setupItems } from "./barItems/setup";
+import { setupItemBehaviors } from "./barItems/behaviors";
+import { defaultShowItems } from "./barItems/defaultShow";
 import * as Utils from "./utils";
 
 const onUpdatePath = () => {
@@ -28,18 +29,8 @@ const onUpdatePath = () => {
 };
 
 export function activate(context: ExtensionContext) {
-  setupItems();
-
-  Utils.showItems([
-    BarItems.runDBRemigrateItem,
-    BarItems.runDBMigrateItem,
-    BarItems.startInteractiveConsoleItem,
-    BarItems.startWebServerItem,
-    BarItems.gitPushItem,
-    BarItems.gitFetchItem,
-    BarItems.gitRebaseContinueItem,
-    BarItems.gitRebaseSkipItem,
-  ]);
+  setupItemBehaviors();
+  defaultShowItems();
 
   const runTestFileCommand = commands.registerCommand(
     "barHelper.runTestFile",

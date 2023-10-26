@@ -1,7 +1,7 @@
 import * as Utils from "../utils";
 import * as BarItems from "./definition";
 
-export const setupItems = () => {
+export const setupItemBehaviors = () => {
   Utils.setupItem(
     BarItems.runTestFileItem,
     "🔥⌃a",
