@@ -4,12 +4,13 @@ import { commands, window, ExtensionContext, workspace } from "vscode";
 
 import * as Helpers from "./helpers";
 import * as Items from "./items";
+import * as Utils from "./utils";
 
 const onUpdatePath = () => {
   const editor = window.activeTextEditor;
 
   if (editor === undefined) {
-    hideTestItems();
+    Utils.hideTestItems();
     Items.formatCodeFileItem.hide();
   } else {
     const filePath = editor.document.fileName;
@@ -18,88 +19,78 @@ const onUpdatePath = () => {
     Items.formatCodeFileItem.show();
 
     if (Helpers.isTestFile(filePath)) {
-      showTestItems();
+      Utils.showTestItems();
     } else {
-      hideTestItems();
+      Utils.hideTestItems();
     }
   }
 };
 
-const hideTestItems = () => {
-  Items.TEST_ITEMS.forEach((item) => {
-    item.hide();
-  });
-};
-
-const showTestItems = () => {
-  Helpers.showItems(Items.TEST_ITEMS);
-};
-
 export function activate(context: ExtensionContext) {
   // Adjust here to add more items
-  Helpers.setupItem(
+  Utils.setupItem(
     Items.runTestFileItem,
     "🔥⌃a",
     "Test file",
     "barHelper.runTestFile"
   );
-  Helpers.setupItem(
+  Utils.setupItem(
     Items.runTestLineItem,
     "1️⃣ ⌃z",
     "Test line",
     "barHelper.runTestLine"
   );
-  Helpers.setupItem(
+  Utils.setupItem(
     Items.runDBRemigrateItem,
     "⭕ reMIGRATION",
     "db:drop db:create db:migrate && db:seed",
     "barHelper.runDBRemigrate"
   );
-  Helpers.setupItem(
+  Utils.setupItem(
     Items.startInteractiveConsoleItem,
     "⛑️⌃i",
     "Start the interactive console",
     "barHelper.startInteractiveConsole"
   );
-  Helpers.setupItem(
+  Utils.setupItem(
     Items.startWebServerItem,
     "🚁⌃s",
     "Start the web server",
     "barHelper.startWebServer"
   );
-  Helpers.setupItem(
+  Utils.setupItem(
     Items.formatCodeFileItem,
     "🎨 ⌃f",
     "format the file",
     "barHelper.formatCodeFile"
   );
-  Helpers.setupItem(
+  Utils.setupItem(
     Items.runDBMigrateItem,
     "⬆️ ⌃m",
     "db:migrate",
     "barHelper.runDBMigrate"
   );
-  Helpers.setupItem(
+  Utils.setupItem(
     Items.gitPushItem,
     "🚀⌃u",
     "git push --force",
     "barHelper.runGitPush"
   );
-  Helpers.setupItem(Items.gitFetchItem, "⏬ FETCH", "git fetch.", "git.fetch");
-  Helpers.setupItem(
+  Utils.setupItem(Items.gitFetchItem, "⏬ FETCH", "git fetch.", "git.fetch");
+  Utils.setupItem(
     Items.gitRebaseContinueItem,
     "🏃 rebase:CONTINUE",
     "git add . && git rebase --continue.",
     "barHelper.runGitRebaseContinue"
   );
-  Helpers.setupItem(
+  Utils.setupItem(
     Items.gitRebaseSkipItem,
     "👋 rebase:SKIP",
     "git rebase --skip.",
     "barHelper.runGitRebaseSkip"
   );
 
-  Helpers.showItems([
+  Utils.showItems([
     Items.runDBRemigrateItem,
     Items.runDBMigrateItem,
     Items.startInteractiveConsoleItem,
@@ -122,9 +113,9 @@ export function activate(context: ExtensionContext) {
         const relativePath = workspace.asRelativePath(filePath, false);
 
         if (Helpers.isRubyTestFile(filePath)) {
-          Helpers.sendToTerminal(`bundle exec rspec ${relativePath}`);
+          Utils.sendToTerminal(`bundle exec rspec ${relativePath}`);
         } else if (Helpers.isElixirTestFile(filePath)) {
-          Helpers.sendToTerminal(`mix test ${relativePath}`);
+          Utils.sendToTerminal(`mix test ${relativePath}`);
         }
       }
     }
@@ -143,11 +134,11 @@ export function activate(context: ExtensionContext) {
         const lineNumber = editor.selection.active.line + 1;
 
         if (Helpers.isRubyTestFile(filePath)) {
-          Helpers.sendToTerminal(
+          Utils.sendToTerminal(
             `bundle exec rspec ${relativePath}:${lineNumber}`
           );
         } else if (Helpers.isElixirTestFile(filePath)) {
-          Helpers.sendToTerminal(`mix test ${relativePath}:${lineNumber}`);
+          Utils.sendToTerminal(`mix test ${relativePath}:${lineNumber}`);
         }
       }
     }
@@ -157,7 +148,7 @@ export function activate(context: ExtensionContext) {
     "barHelper.runDBRemigrate",
     () => {
       // TODO: Support Elixir
-      Helpers.sendToTerminal(
+      Utils.sendToTerminal(
         "bin/rails db:environment:set RAILS_ENV=development && bin/rails db:drop db:setup"
       );
     }
@@ -167,7 +158,7 @@ export function activate(context: ExtensionContext) {
     "barHelper.runDBMigrate",
     () => {
       // TODO: Support Elixir
-      Helpers.sendToTerminal("bundle exec rails db:migrate");
+      Utils.sendToTerminal("bundle exec rails db:migrate");
     }
   );
 
@@ -175,7 +166,7 @@ export function activate(context: ExtensionContext) {
     "barHelper.startInteractiveConsole",
     () => {
       // TODO: Support Elixir
-      Helpers.sendToTerminal("bundle exec rails console");
+      Utils.sendToTerminal("bundle exec rails console");
     }
   );
 
@@ -183,7 +174,7 @@ export function activate(context: ExtensionContext) {
     "barHelper.startWebServer",
     () => {
       // TODO: Support Elixir
-      Helpers.sendToTerminal("foreman start -f Procfile.dev");
+      Utils.sendToTerminal("foreman start -f Procfile.dev");
     }
   );
 
@@ -199,12 +190,12 @@ export function activate(context: ExtensionContext) {
         const relativePath = workspace.asRelativePath(filePath, false);
 
         if (Helpers.isRubyFile(filePath)) {
-          Helpers.sendToTerminal(`bundle exec rubocop -a ${relativePath}`);
+          Utils.sendToTerminal(`bundle exec rubocop -a ${relativePath}`);
         } else if (Helpers.isElixirFile(filePath)) {
-          Helpers.sendToTerminal(`mix format ${relativePath}`);
+          Utils.sendToTerminal(`mix format ${relativePath}`);
         } else if (Helpers.isJSFile(filePath)) {
           // TODO: Support npm
-          Helpers.sendToTerminal(`yarn eslint --color --fix ${relativePath}`);
+          Utils.sendToTerminal(`yarn eslint --color --fix ${relativePath}`);
         }
       }
     }
@@ -213,21 +204,21 @@ export function activate(context: ExtensionContext) {
   const runGitPushCommand = commands.registerCommand(
     "barHelper.runGitPush",
     () => {
-      Helpers.sendToTerminal("ggpush -f");
+      Utils.sendToTerminal("ggpush -f");
     }
   );
 
   const runGitRebaseContinueCommand = commands.registerCommand(
     "barHelper.runGitRebaseContinue",
     () => {
-      Helpers.sendToTerminal("ga . && g rebase --continue");
+      Utils.sendToTerminal("ga . && g rebase --continue");
     }
   );
 
   const runGitRebaseSkipCommand = commands.registerCommand(
     "barHelper.runGitRebaseSkip",
     () => {
-      Helpers.sendToTerminal("g rebase --skip");
+      Utils.sendToTerminal("g rebase --skip");
     }
   );
 
