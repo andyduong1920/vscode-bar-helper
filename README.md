@@ -23,3 +23,4 @@ Run the test from the `Status bar` or `Menu`
 2. Make it as default show by adding it to `src/editableArea/2_defaultShow.ts`
 3. Define the command in `src/editableArea/3_commands.ts`
 4. Setup the Item behavior in `src/editableArea/4_behaviors.ts` link to the command in step 3
+5. Update the `src/editableArea/5_customShow.ts` to modify the Items per file Type, for example display only for Test files.

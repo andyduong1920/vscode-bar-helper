@@ -2,26 +2,23 @@
 
 import { window, ExtensionContext } from "vscode";
 
-import * as FileCheckHelpers from "./fileCheckHelpers";
 import * as Utils from "./utils";
 import * as BarItems from "./editableArea/1_definition";
-import { setupItemBehaviors } from "./editableArea/4_behaviors";
-import * as Commands from "./editableArea/3_commands";
 import { defaultShowItems } from "./editableArea/2_defaultShow";
+import * as Commands from "./editableArea/3_commands";
+import { setupItemBehaviors } from "./editableArea/4_behaviors";
+import {
+  showPerFileType,
+  hideAllPerFileType,
+} from "./editableArea/5_customShow";
 
 const onUpdatePath = () => {
   const editor = window.activeTextEditor;
 
   if (editor === undefined) {
-    Utils.hideTestItems();
+    hideAllPerFileType();
   } else {
-    const filePath = editor.document.fileName;
-
-    if (FileCheckHelpers.isTestFile(filePath)) {
-      Utils.showTestItems();
-    } else {
-      Utils.hideTestItems();
-    }
+    showPerFileType(editor);
   }
 };
 

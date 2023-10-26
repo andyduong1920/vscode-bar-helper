@@ -1,7 +1,5 @@
 import { window } from "vscode";
 
-import * as BarItems from "./editableArea/1_definition";
-
 export const sendToTerminal = (thisText: string) => {
   let terminal = undefined;
 
@@ -31,16 +29,4 @@ export const setupItem = (
   item.text = thisText;
   item.tooltip = thisTooltip;
   item.command = thisCommand;
-};
-
-const TEST_ITEMS = [BarItems.runTestFileItem, BarItems.runTestLineItem];
-
-export const hideTestItems = () => {
-  TEST_ITEMS.forEach((item) => {
-    item.hide();
-  });
-};
-
-export const showTestItems = () => {
-  showItems(TEST_ITEMS);
 };
