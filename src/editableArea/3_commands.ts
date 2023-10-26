@@ -109,6 +109,21 @@ export const runGitPushCommand = commands.registerCommand(
   }
 );
 
+export const runGitStatusCommand = commands.registerCommand(
+  "barHelper.runGitStatus",
+  () => {
+    Utils.sendToTerminal("gst");
+  }
+);
+
+export const runGitCheckoutDevelopPullAndFetchItemCommand =
+  commands.registerCommand(
+    "barHelper.runGitCheckoutDevelopPullAndFetchItem",
+    () => {
+      Utils.sendToTerminal("gco develop && g pull && g fetch");
+    }
+  );
+
 // Right side
 
 export const runGitRebaseContinueCommand = commands.registerCommand(
