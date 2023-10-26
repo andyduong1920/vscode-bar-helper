@@ -14,12 +14,8 @@ const onUpdatePath = () => {
 
   if (editor === undefined) {
     Utils.hideTestItems();
-    BarItems.formatCodeFileItem.hide();
   } else {
     const filePath = editor.document.fileName;
-
-    // Always show the format item on any file
-    BarItems.formatCodeFileItem.show();
 
     if (FileCheckHelpers.isTestFile(filePath)) {
       Utils.showTestItems();

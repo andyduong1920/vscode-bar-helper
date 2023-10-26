@@ -3,6 +3,7 @@ import * as BarItems from "./definition";
 
 export const defaultShowItems = () => {
   Utils.showItems([
+    BarItems.formatCodeFileItem,
     BarItems.runDBRemigrateItem,
     BarItems.runDBMigrateItem,
     BarItems.startInteractiveConsoleItem,
