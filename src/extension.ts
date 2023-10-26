@@ -3,11 +3,11 @@
 import { window, ExtensionContext } from "vscode";
 
 import * as FileCheckHelpers from "./fileCheckHelpers";
-import * as BarItems from "./barItems/definition";
 import * as Utils from "./utils";
-import * as Commands from "./commands";
-import { setupItemBehaviors } from "./barItems/behaviors";
-import { defaultShowItems } from "./barItems/defaultShow";
+import * as BarItems from "./editableArea/1_definition";
+import { setupItemBehaviors } from "./editableArea/4_behaviors";
+import * as Commands from "./editableArea/3_commands";
+import { defaultShowItems } from "./editableArea/2_defaultShow";
 
 const onUpdatePath = () => {
   const editor = window.activeTextEditor;

@@ -1,5 +1,5 @@
 import * as Utils from "../utils";
-import * as BarItems from "./definition";
+import * as BarItems from "./1_definition";
 
 export const setupItemBehaviors = () => {
   Utils.setupItem(

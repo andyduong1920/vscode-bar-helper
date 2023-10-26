@@ -19,7 +19,7 @@ Run the test from the `Status bar` or `Menu`
 2. Run `make publish`
 
 ### IV/ Add new Item
-1. Define the bar item in `src/barItems/definitions.ts`
-2. Make it as default show by adding it to `src/barItems/defaultShow.ts`
-3. Define the command in `src/commands.ts`
-4. Setup the Item behavior in `src/barItems/behaviors.ts` link to the command in step 3
+1. Define the bar item in `src/editableArea/1_definitions.ts`
+2. Make it as default show by adding it to `src/editableArea/2_defaultShow.ts`
+3. Define the command in `src/editableArea/3_commands.ts`
+4. Setup the Item behavior in `src/editableArea/4_behaviors.ts` link to the command in step 3

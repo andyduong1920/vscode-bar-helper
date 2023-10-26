@@ -1,6 +1,6 @@
 import { commands, window, workspace } from "vscode";
-import * as FileCheckHelpers from "./fileCheckHelpers";
-import * as Utils from "./utils";
+import * as FileCheckHelpers from "../fileCheckHelpers";
+import * as Utils from "../utils";
 
 export const runTestFileCommand = commands.registerCommand(
   "barHelper.runTestFile",
