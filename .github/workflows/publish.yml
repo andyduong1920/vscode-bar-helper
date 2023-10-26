@@ -34,6 +34,6 @@ jobs:
         run: npm install --global @vscode/vsce
 
       - name: Publish
-        run: make compile_and_package && make publish
+        run: make compile_and_package && vsce publish --allow-star-activation
         env:
-          VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
+          VSCE_PAT: ${{ secrets.VSCE_TOKEN }}
