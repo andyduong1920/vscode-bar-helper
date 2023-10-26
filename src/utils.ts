@@ -1,6 +1,6 @@
 import { window } from "vscode";
 
-import * as BarItems from "./barItems";
+import * as BarItems from "./barItems/definition";
 
 export const sendToTerminal = (thisText: string) => {
   let terminal = undefined;

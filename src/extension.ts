@@ -2,8 +2,9 @@
 
 import { commands, window, ExtensionContext, workspace } from "vscode";
 
-import * as Helpers from "./helpers";
-import * as BarItems from "./barItems";
+import * as FileCheckHelpers from "./fileCheckHelpers";
+import * as BarItems from "./barItems/definition";
+import { setupItems } from "./barItems/setup";
 import * as Utils from "./utils";
 
 const onUpdatePath = () => {
@@ -18,7 +19,7 @@ const onUpdatePath = () => {
     // Always show the format item on any file
     BarItems.formatCodeFileItem.show();
 
-    if (Helpers.isTestFile(filePath)) {
+    if (FileCheckHelpers.isTestFile(filePath)) {
       Utils.showTestItems();
     } else {
       Utils.hideTestItems();
@@ -27,68 +28,7 @@ const onUpdatePath = () => {
 };
 
 export function activate(context: ExtensionContext) {
-  // Adjust here to add more items
-  Utils.setupItem(
-    BarItems.runTestFileItem,
-    "🔥⌃a",
-    "Test file",
-    "barHelper.runTestFile"
-  );
-  Utils.setupItem(
-    BarItems.runTestLineItem,
-    "1️⃣ ⌃z",
-    "Test line",
-    "barHelper.runTestLine"
-  );
-  Utils.setupItem(
-    BarItems.runDBRemigrateItem,
-    "⭕ reMIGRATION",
-    "db:drop db:create db:migrate && db:seed",
-    "barHelper.runDBRemigrate"
-  );
-  Utils.setupItem(
-    BarItems.startInteractiveConsoleItem,
-    "⛑️⌃i",
-    "Start the interactive console",
-    "barHelper.startInteractiveConsole"
-  );
-  Utils.setupItem(
-    BarItems.startWebServerItem,
-    "🚁⌃s",
-    "Start the web server",
-    "barHelper.startWebServer"
-  );
-  Utils.setupItem(
-    BarItems.formatCodeFileItem,
-    "🎨 ⌃f",
-    "format the file",
-    "barHelper.formatCodeFile"
-  );
-  Utils.setupItem(
-    BarItems.runDBMigrateItem,
-    "⬆️ ⌃m",
-    "db:migrate",
-    "barHelper.runDBMigrate"
-  );
-  Utils.setupItem(
-    BarItems.gitPushItem,
-    "🚀⌃u",
-    "git push --force",
-    "barHelper.runGitPush"
-  );
-  Utils.setupItem(BarItems.gitFetchItem, "⏬ FETCH", "git fetch.", "git.fetch");
-  Utils.setupItem(
-    BarItems.gitRebaseContinueItem,
-    "🏃 rebase:CONTINUE",
-    "git add . && git rebase --continue.",
-    "barHelper.runGitRebaseContinue"
-  );
-  Utils.setupItem(
-    BarItems.gitRebaseSkipItem,
-    "👋 rebase:SKIP",
-    "git rebase --skip.",
-    "barHelper.runGitRebaseSkip"
-  );
+  setupItems();
 
   Utils.showItems([
     BarItems.runDBRemigrateItem,
@@ -112,9 +52,9 @@ export function activate(context: ExtensionContext) {
         const filePath = editor.document.fileName;
         const relativePath = workspace.asRelativePath(filePath, false);
 
-        if (Helpers.isRubyTestFile(filePath)) {
+        if (FileCheckHelpers.isRubyTestFile(filePath)) {
           Utils.sendToTerminal(`bundle exec rspec ${relativePath}`);
-        } else if (Helpers.isElixirTestFile(filePath)) {
+        } else if (FileCheckHelpers.isElixirTestFile(filePath)) {
           Utils.sendToTerminal(`mix test ${relativePath}`);
         }
       }
@@ -133,11 +73,11 @@ export function activate(context: ExtensionContext) {
         const relativePath = workspace.asRelativePath(filePath, false);
         const lineNumber = editor.selection.active.line + 1;
 
-        if (Helpers.isRubyTestFile(filePath)) {
+        if (FileCheckHelpers.isRubyTestFile(filePath)) {
           Utils.sendToTerminal(
             `bundle exec rspec ${relativePath}:${lineNumber}`
           );
-        } else if (Helpers.isElixirTestFile(filePath)) {
+        } else if (FileCheckHelpers.isElixirTestFile(filePath)) {
           Utils.sendToTerminal(`mix test ${relativePath}:${lineNumber}`);
         }
       }
@@ -189,11 +129,11 @@ export function activate(context: ExtensionContext) {
         const filePath = editor.document.fileName;
         const relativePath = workspace.asRelativePath(filePath, false);
 
-        if (Helpers.isRubyFile(filePath)) {
+        if (FileCheckHelpers.isRubyFile(filePath)) {
           Utils.sendToTerminal(`bundle exec rubocop -a ${relativePath}`);
-        } else if (Helpers.isElixirFile(filePath)) {
+        } else if (FileCheckHelpers.isElixirFile(filePath)) {
           Utils.sendToTerminal(`mix format ${relativePath}`);
-        } else if (Helpers.isJSFile(filePath)) {
+        } else if (FileCheckHelpers.isJSFile(filePath)) {
           // TODO: Support npm
           Utils.sendToTerminal(`yarn eslint --color --fix ${relativePath}`);
         }
