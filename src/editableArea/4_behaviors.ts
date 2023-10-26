@@ -51,7 +51,12 @@ export const setupItemBehaviors = () => {
     "git push --force",
     "barHelper.runGitPush"
   );
-  Utils.setupItem(BarItems.gitFetchItem, "⏬ fetch", "git fetch", "git.fetch");
+  Utils.setupItem(
+    BarItems.gitCheckoutDevelopPullAndFetchItem,
+    "⏬ checkout:develop - pull - fetch",
+    "git checkout to develop and then pull and fetch",
+    "git checkout develop && git pull && git fetch"
+  );
 
   // Right side
   Utils.setupItem(

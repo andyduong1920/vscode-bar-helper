@@ -29,7 +29,7 @@ export const runDBRemigrateItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -7
 );
-export const gitFetchItem = window.createStatusBarItem(
+export const gitCheckoutDevelopPullAndFetchItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -9
 );
