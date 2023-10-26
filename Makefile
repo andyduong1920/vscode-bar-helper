@@ -14,6 +14,3 @@ install:
 package_and_install: compile package install
 
 compile_and_package: compile package
-
-publish:
-	vsce publish
