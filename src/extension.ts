@@ -87,71 +87,74 @@ const hideTestItems = () => {
 };
 
 const showTestItems = () => {
-  showItems(TEST_ITEMS);
-};
-
-const showItems = (items: any) => {
-  items.forEach((item: any) => {
-    item.show();
-  });
-};
-
-const setupItem = (
-  item: any,
-  thisText: any,
-  thisTooltip: any,
-  thisCommand: any
-) => {
-  item.text = thisText;
-  item.tooltip = thisTooltip;
-  item.command = thisCommand;
+  Helpers.showItems(TEST_ITEMS);
 };
 
 export function activate(context: ExtensionContext) {
   // Adjust here to add more items
-  setupItem(runTestFileItem, "🔥⌃a", "Test file", "barHelper.runTestFile");
-  setupItem(runTestLineItem, "1️⃣ ⌃z", "Test line", "barHelper.runTestLine");
-  setupItem(
+  Helpers.setupItem(
+    runTestFileItem,
+    "🔥⌃a",
+    "Test file",
+    "barHelper.runTestFile"
+  );
+  Helpers.setupItem(
+    runTestLineItem,
+    "1️⃣ ⌃z",
+    "Test line",
+    "barHelper.runTestLine"
+  );
+  Helpers.setupItem(
     runDBRemigrateItem,
     "⭕ reMIGRATION",
     "db:drop db:create db:migrate && db:seed",
     "barHelper.runDBRemigrate"
   );
-  setupItem(
+  Helpers.setupItem(
     startInteractiveConsoleItem,
     "⛑️⌃i",
     "Start the interactive console",
     "barHelper.startInteractiveConsole"
   );
-  setupItem(
+  Helpers.setupItem(
     startWebServerItem,
     "🚁⌃s",
     "Start the web server",
     "barHelper.startWebServer"
   );
-  setupItem(
+  Helpers.setupItem(
     formatCodeFileItem,
     "🎨 ⌃f",
     "format the file",
     "barHelper.formatCodeFile"
   );
-  setupItem(runDBMigrateItem, "⬆️ ⌃m", "db:migrate", "barHelper.runDBMigrate");
-  setupItem(gitPushItem, "🚀⌃u", "git push --force", "barHelper.runGitPush");
-  setupItem(gitFetchItem, "⏬ FETCH", "git fetch.", "git.fetch");
-  setupItem(
+  Helpers.setupItem(
+    runDBMigrateItem,
+    "⬆️ ⌃m",
+    "db:migrate",
+    "barHelper.runDBMigrate"
+  );
+  Helpers.setupItem(
+    gitPushItem,
+    "🚀⌃u",
+    "git push --force",
+    "barHelper.runGitPush"
+  );
+  Helpers.setupItem(gitFetchItem, "⏬ FETCH", "git fetch.", "git.fetch");
+  Helpers.setupItem(
     gitRebaseContinueItem,
     "🏃 rebase:CONTINUE",
     "git add . && git rebase --continue.",
     "barHelper.runGitRebaseContinue"
   );
-  setupItem(
+  Helpers.setupItem(
     gitRebaseSkipItem,
     "👋 rebase:SKIP",
     "git rebase --skip.",
     "barHelper.runGitRebaseSkip"
   );
 
-  showItems([
+  Helpers.showItems([
     runDBRemigrateItem,
     runDBMigrateItem,
     startInteractiveConsoleItem,

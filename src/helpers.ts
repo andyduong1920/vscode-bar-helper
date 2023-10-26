@@ -14,6 +14,23 @@ export const sendToTerminal = (thisText: string) => {
   terminal.sendText(thisText);
 };
 
+export const showItems = (items: any) => {
+  items.forEach((item: any) => {
+    item.show();
+  });
+};
+
+export const setupItem = (
+  item: any,
+  thisText: any,
+  thisTooltip: any,
+  thisCommand: any
+) => {
+  item.text = thisText;
+  item.tooltip = thisTooltip;
+  item.command = thisCommand;
+};
+
 // Adjust here to add more items
 export const isTestFile = (filePath: any) => {
   return isRubyTestFile(filePath) || isElixirTestFile(filePath);
