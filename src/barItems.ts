@@ -1,5 +1,8 @@
 import { window, StatusBarAlignment } from "vscode";
 
+// Items definition for the status bar
+
+// Left side
 export const runTestFileItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -1

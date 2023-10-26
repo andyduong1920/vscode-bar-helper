@@ -1,6 +1,6 @@
 import { window } from "vscode";
 
-import * as Items from "./items";
+import * as BarItems from "./barItems";
 
 export const sendToTerminal = (thisText: string) => {
   let terminal = undefined;
@@ -34,11 +34,11 @@ export const setupItem = (
 };
 
 export const hideTestItems = () => {
-  Items.TEST_ITEMS.forEach((item) => {
+  BarItems.TEST_ITEMS.forEach((item) => {
     item.hide();
   });
 };
 
 export const showTestItems = () => {
-  showItems(Items.TEST_ITEMS);
+  showItems(BarItems.TEST_ITEMS);
 };

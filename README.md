@@ -17,3 +17,6 @@ Run the test from the `Status bar` or `Menu`
 
 1. Run `make compile_and_package`
 2. Run `make publish`
+
+### IV/ Add new Item
+1. Edit the `src/items.ts` file

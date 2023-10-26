@@ -3,7 +3,7 @@
 import { commands, window, ExtensionContext, workspace } from "vscode";
 
 import * as Helpers from "./helpers";
-import * as Items from "./items";
+import * as BarItems from "./barItems";
 import * as Utils from "./utils";
 
 const onUpdatePath = () => {
@@ -11,12 +11,12 @@ const onUpdatePath = () => {
 
   if (editor === undefined) {
     Utils.hideTestItems();
-    Items.formatCodeFileItem.hide();
+    BarItems.formatCodeFileItem.hide();
   } else {
     const filePath = editor.document.fileName;
 
     // Always show the format item on any file
-    Items.formatCodeFileItem.show();
+    BarItems.formatCodeFileItem.show();
 
     if (Helpers.isTestFile(filePath)) {
       Utils.showTestItems();
@@ -29,76 +29,76 @@ const onUpdatePath = () => {
 export function activate(context: ExtensionContext) {
   // Adjust here to add more items
   Utils.setupItem(
-    Items.runTestFileItem,
+    BarItems.runTestFileItem,
     "🔥⌃a",
     "Test file",
     "barHelper.runTestFile"
   );
   Utils.setupItem(
-    Items.runTestLineItem,
+    BarItems.runTestLineItem,
     "1️⃣ ⌃z",
     "Test line",
     "barHelper.runTestLine"
   );
   Utils.setupItem(
-    Items.runDBRemigrateItem,
+    BarItems.runDBRemigrateItem,
     "⭕ reMIGRATION",
     "db:drop db:create db:migrate && db:seed",
     "barHelper.runDBRemigrate"
   );
   Utils.setupItem(
-    Items.startInteractiveConsoleItem,
+    BarItems.startInteractiveConsoleItem,
     "⛑️⌃i",
     "Start the interactive console",
     "barHelper.startInteractiveConsole"
   );
   Utils.setupItem(
-    Items.startWebServerItem,
+    BarItems.startWebServerItem,
     "🚁⌃s",
     "Start the web server",
     "barHelper.startWebServer"
   );
   Utils.setupItem(
-    Items.formatCodeFileItem,
+    BarItems.formatCodeFileItem,
     "🎨 ⌃f",
     "format the file",
     "barHelper.formatCodeFile"
   );
   Utils.setupItem(
-    Items.runDBMigrateItem,
+    BarItems.runDBMigrateItem,
     "⬆️ ⌃m",
     "db:migrate",
     "barHelper.runDBMigrate"
   );
   Utils.setupItem(
-    Items.gitPushItem,
+    BarItems.gitPushItem,
     "🚀⌃u",
     "git push --force",
     "barHelper.runGitPush"
   );
-  Utils.setupItem(Items.gitFetchItem, "⏬ FETCH", "git fetch.", "git.fetch");
+  Utils.setupItem(BarItems.gitFetchItem, "⏬ FETCH", "git fetch.", "git.fetch");
   Utils.setupItem(
-    Items.gitRebaseContinueItem,
+    BarItems.gitRebaseContinueItem,
     "🏃 rebase:CONTINUE",
     "git add . && git rebase --continue.",
     "barHelper.runGitRebaseContinue"
   );
   Utils.setupItem(
-    Items.gitRebaseSkipItem,
+    BarItems.gitRebaseSkipItem,
     "👋 rebase:SKIP",
     "git rebase --skip.",
     "barHelper.runGitRebaseSkip"
   );
 
   Utils.showItems([
-    Items.runDBRemigrateItem,
-    Items.runDBMigrateItem,
-    Items.startInteractiveConsoleItem,
-    Items.startWebServerItem,
-    Items.gitPushItem,
-    Items.gitFetchItem,
-    Items.gitRebaseContinueItem,
-    Items.gitRebaseSkipItem,
+    BarItems.runDBRemigrateItem,
+    BarItems.runDBMigrateItem,
+    BarItems.startInteractiveConsoleItem,
+    BarItems.startWebServerItem,
+    BarItems.gitPushItem,
+    BarItems.gitFetchItem,
+    BarItems.gitRebaseContinueItem,
+    BarItems.gitRebaseSkipItem,
   ]);
 
   const runTestFileCommand = commands.registerCommand(
@@ -243,7 +243,7 @@ export function activate(context: ExtensionContext) {
 }
 
 export function deactivate() {
-  Items.BAR_ITEMS.forEach((item) => {
+  BarItems.BAR_ITEMS.forEach((item) => {
     item.dispose();
   });
 }
