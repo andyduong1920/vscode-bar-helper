@@ -49,18 +49,3 @@ export const gitRebaseContinueItem = window.createStatusBarItem(
   StatusBarAlignment.Right,
   2
 );
-
-// Adjust here to add more items
-export const TEST_ITEMS = [runTestFileItem, runTestLineItem];
-export const BAR_ITEMS = [
-  runDBRemigrateItem,
-  runDBMigrateItem,
-  startInteractiveConsoleItem,
-  startWebServerItem,
-  formatCodeFileItem,
-  gitPushItem,
-  gitFetchItem,
-  gitRebaseContinueItem,
-  gitRebaseSkipItem,
-  ...TEST_ITEMS,
-];

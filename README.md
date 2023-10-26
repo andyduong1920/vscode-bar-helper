@@ -19,4 +19,4 @@ Run the test from the `Status bar` or `Menu`
 2. Run `make publish`
 
 ### IV/ Add new Item
-1. Edit the `src/items.ts` file
+1. Edit the `src/barItems.ts` file

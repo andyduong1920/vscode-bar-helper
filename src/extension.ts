@@ -243,7 +243,7 @@ export function activate(context: ExtensionContext) {
 }
 
 export function deactivate() {
-  BarItems.BAR_ITEMS.forEach((item) => {
+  Object.values(BarItems).forEach((item) => {
     item.dispose();
   });
 }

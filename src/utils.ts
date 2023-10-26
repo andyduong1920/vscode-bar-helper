@@ -33,12 +33,14 @@ export const setupItem = (
   item.command = thisCommand;
 };
 
+const TEST_ITEMS = [BarItems.runTestFileItem, BarItems.runTestLineItem];
+
 export const hideTestItems = () => {
-  BarItems.TEST_ITEMS.forEach((item) => {
+  TEST_ITEMS.forEach((item) => {
     item.hide();
   });
 };
 
 export const showTestItems = () => {
-  showItems(BarItems.TEST_ITEMS);
+  showItems(TEST_ITEMS);
 };
