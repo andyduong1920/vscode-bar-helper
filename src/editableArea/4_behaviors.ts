@@ -53,7 +53,7 @@ export const setupItemBehaviors = () => {
   );
   Utils.setupItem(
     BarItems.gitStatusItem,
-    "ℹ️ gst",
+    "ℹ️ gst ⌃i",
     "git status",
     "barHelper.runGitStatus"
   );

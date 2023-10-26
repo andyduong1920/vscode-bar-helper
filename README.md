@@ -5,11 +5,12 @@ Run the test from the `Status bar` or `Menu`
 ### I/ Development
 
 1. Clone the repo
-2. Run `npm install`
-3. Run `make package_and_install`
-4. Test
+2. Update the Node version in `.tool-versions`
+3. Run `npm install`
+4. Run `make package_and_install`
+5. Test on VSCode
 
-### II/ Use
+### II/ Use existing build version
 
 1. Install it on [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=andyduong1920.bar-helper)
 
@@ -24,3 +25,4 @@ Run the test from the `Status bar` or `Menu`
 3. Define the command in `src/editableArea/3_commands.ts`
 4. Setup the Item behavior in `src/editableArea/4_behaviors.ts` link to the command in step 3
 5. Update the `src/editableArea/5_customShow.ts` to modify the Items per file Type, for example display only for Test files.
+6. Edit the `package.json` to add the new command to the `contributes.commands` and `contributes.keybindings` sections

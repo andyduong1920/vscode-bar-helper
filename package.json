@@ -52,7 +52,7 @@
       },
       {
         "key": "ctrl+i",
-        "command": "barHelper.startInteractiveConsole"
+        "command": "barHelper.runGitStatus"
       },
       {
         "key": "ctrl+u",
