@@ -2,6 +2,8 @@ import { commands, window, workspace } from "vscode";
 import * as FileCheckHelpers from "../fileCheckHelpers";
 import * as Utils from "../utils";
 
+// Left side
+
 export const runTestFileCommand = commands.registerCommand(
   "barHelper.runTestFile",
   () => {
@@ -106,6 +108,8 @@ export const runGitPushCommand = commands.registerCommand(
     Utils.sendToTerminal("ggpush -f");
   }
 );
+
+// Right side
 
 export const runGitRebaseContinueCommand = commands.registerCommand(
   "barHelper.runGitRebaseContinue",

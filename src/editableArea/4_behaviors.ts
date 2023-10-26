@@ -2,6 +2,7 @@ import * as Utils from "../utils";
 import * as BarItems from "./1_definition";
 
 export const setupItemBehaviors = () => {
+  // Left side
   Utils.setupItem(
     BarItems.runTestFileItem,
     "🔥⌃a",
@@ -51,6 +52,8 @@ export const setupItemBehaviors = () => {
     "barHelper.runGitPush"
   );
   Utils.setupItem(BarItems.gitFetchItem, "⏬ FETCH", "git fetch.", "git.fetch");
+
+  // Right side
   Utils.setupItem(
     BarItems.gitRebaseContinueItem,
     "🏃 rebase:CONTINUE",
