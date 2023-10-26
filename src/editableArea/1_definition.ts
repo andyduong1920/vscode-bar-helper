@@ -33,9 +33,13 @@ export const gitCheckoutDevelopPullAndFetchItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -9
 );
-export const gitPushItem = window.createStatusBarItem(
+export const gitStatusItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -10
+);
+export const gitPushItem = window.createStatusBarItem(
+  StatusBarAlignment.Left,
+  -11
 );
 
 // Right side
