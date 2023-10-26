@@ -2,7 +2,7 @@
   "name": "bar-helper",
   "displayName": "Bar Helper",
   "description": "Run any command from the status bar.",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "publisher": "andyduong1920",
   "repository": {
     "type": "git",
@@ -57,6 +57,10 @@
       {
         "key": "ctrl+u",
         "command": "barHelper.runGitPush"
+      },
+      {
+        "key": "ctrl+c",
+        "command": "barHelper.runGitCheckoutDevelopPull"
       }
     ],
     "commands": [
