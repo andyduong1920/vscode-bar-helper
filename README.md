@@ -21,5 +21,5 @@ Run the test from the `Status bar` or `Menu`
 ### IV/ Add new Item
 1. Define the bar item in `src/barItems/definitions.ts`
 2. Make it as default show by adding it to `src/barItems/defaultShow.ts`
-3. Define the command in `src/barItems/commands.ts`
+3. Define the command in `src/commands.ts`
 4. Setup the Item behavior in `src/barItems/behaviors.ts` link to the command in step 3
