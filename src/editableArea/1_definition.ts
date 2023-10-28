@@ -31,11 +31,11 @@ export const runDBRemigrateItem = window.createStatusBarItem(
 );
 export const gitPushItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
-  -9
+  -10
 );
 export const gitStatusItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
-  -10
+  -9
 );
 export const gitCheckoutDevelopPullItem = window.createStatusBarItem(
   StatusBarAlignment.Left,

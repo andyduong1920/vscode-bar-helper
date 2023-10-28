@@ -119,7 +119,7 @@ export const runGitStatusCommand = commands.registerCommand(
 export const runGitCheckoutDevelopPullItemCommand = commands.registerCommand(
   "barHelper.runGitCheckoutDevelopPull",
   () => {
-    Utils.sendToTerminal("gco develop && g pull");
+    Utils.sendToTerminal("gco develop && ggpull");
   }
 );
 
