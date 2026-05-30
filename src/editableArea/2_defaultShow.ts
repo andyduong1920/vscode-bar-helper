@@ -9,7 +9,7 @@ export const defaultShowItems = () => {
     // BarItems.startInteractiveConsoleItem,
     // BarItems.startWebServerItem,
     BarItems.gitPushItem,
-    BarItems.gitStatusItem,
+    // BarItems.gitStatusItem,
     BarItems.gitCheckoutDevelopPullItem,
     BarItems.gitRebaseContinueItem,
     BarItems.gitRebaseSkipItem,
