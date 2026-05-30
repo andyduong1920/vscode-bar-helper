@@ -51,11 +51,11 @@ export const gitPushItem = window.createStatusBarItem(
   StatusBarAlignment.Right,
   3,
 );
-export const graphiteSyncItem = window.createStatusBarItem(
+export const graphiteSubmitItem = window.createStatusBarItem(
   StatusBarAlignment.Right,
   4,
 );
-export const graphiteSubmitItem = window.createStatusBarItem(
+export const graphiteSyncItem = window.createStatusBarItem(
   StatusBarAlignment.Right,
   5,
 );
