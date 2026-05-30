@@ -64,6 +64,19 @@ export const setupItemBehaviors = () => {
     "barHelper.runGitCheckoutDevelopPull",
   );
 
+  Utils.setupItem(
+    BarItems.graphiteSyncItem,
+    "🔃 gt sync",
+    "gt sync",
+    "barHelper.runGraphiteSync",
+  );
+  Utils.setupItem(
+    BarItems.graphiteSubmitItem,
+    "⏫ gt submit",
+    "gt submit --stack",
+    "barHelper.runGraphiteSubmit",
+  );
+
   // Right side
   Utils.setupItem(
     BarItems.gitRebaseContinueItem,

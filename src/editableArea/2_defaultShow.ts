@@ -13,5 +13,7 @@ export const defaultShowItems = () => {
     BarItems.gitCheckoutDevelopPullItem,
     BarItems.gitRebaseContinueItem,
     BarItems.gitRebaseSkipItem,
+    BarItems.graphiteSyncItem,
+    BarItems.graphiteSubmitItem,
   ]);
 };

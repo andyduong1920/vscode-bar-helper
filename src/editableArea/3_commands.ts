@@ -125,6 +125,20 @@ export const runGitCheckoutDevelopPullItemCommand = commands.registerCommand(
 
 // Right side
 
+export const runGraphiteSyncCommand = commands.registerCommand(
+  "barHelper.runGraphiteSync",
+  () => {
+    Utils.sendToTerminal("gt sync");
+  }
+);
+
+export const runGraphiteSubmitCommand = commands.registerCommand(
+  "barHelper.runGraphiteSubmit",
+  () => {
+    Utils.sendToTerminal("gt submit --stack");
+  }
+);
+
 export const runGitRebaseContinueCommand = commands.registerCommand(
   "barHelper.runGitRebaseContinue",
   () => {

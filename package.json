@@ -103,6 +103,14 @@
       {
         "command": "barHelper.runGitRebaseSkip",
         "title": "11111: 👋 Git rebase SKIP 👋"
+      },
+      {
+        "command": "barHelper.runGraphiteSync",
+        "title": "11111: gt sync"
+      },
+      {
+        "command": "barHelper.runGraphiteSubmit",
+        "title": "11111: gt submit --stack"
       }
     ]
   },
