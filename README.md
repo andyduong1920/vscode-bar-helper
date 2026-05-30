@@ -23,3 +23,5 @@ Install it on [VSCode Marketplace](https://marketplace.visualstudio.com/items?it
 ### III/ Publish
 
 - Trigger the [publish workflow](https://github.com/andyduong1920/vscode-bar-helper/actions/workflows/publish.yml) on Github Actions.
+
+- Get new token at https://dev.azure.com/andyduong1920/_usersSettings/tokens
