@@ -60,7 +60,7 @@ export const setupItemBehaviors = () => {
   Utils.setupItem(
     BarItems.gitCheckoutDevelopPullItem,
     "⏬ develop && pull ⌃c",
-    "git checkout to develop and then pull",
+    "git branch -d develop && git fetch && git checkout develop",
     "barHelper.runGitCheckoutDevelopPull"
   );
 
