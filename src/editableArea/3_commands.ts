@@ -105,7 +105,7 @@ export const formatCodeFileCommand = commands.registerCommand(
 export const runGitPushCommand = commands.registerCommand(
   "barHelper.runGitPush",
   () => {
-    Utils.sendToTerminal("ggpush -f");
+    Utils.sendToTerminal("git push --force-with-lease");
   }
 );
 

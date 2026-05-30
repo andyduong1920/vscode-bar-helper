@@ -48,7 +48,7 @@ export const setupItemBehaviors = () => {
   Utils.setupItem(
     BarItems.gitPushItem,
     "🚀⌃u",
-    "git push --force",
+    "git push --force-with-lease",
     "barHelper.runGitPush"
   );
   Utils.setupItem(
