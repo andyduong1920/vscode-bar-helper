@@ -7,61 +7,61 @@ export const setupItemBehaviors = () => {
     BarItems.runTestFileItem,
     "🔥⌃a",
     "Test file",
-    "barHelper.runTestFile"
+    "barHelper.runTestFile",
   );
   Utils.setupItem(
     BarItems.runTestLineItem,
     "1️⃣ ⌃z",
     "Test line",
-    "barHelper.runTestLine"
+    "barHelper.runTestLine",
   );
   Utils.setupItem(
     BarItems.runDBRemigrateItem,
     "⭕ reMIGRATION",
     "db:drop db:create db:migrate && db:seed",
-    "barHelper.runDBRemigrate"
+    "barHelper.runDBRemigrate",
   );
   Utils.setupItem(
     BarItems.startInteractiveConsoleItem,
     "⛑️⌃i",
     "Start the interactive console",
-    "barHelper.startInteractiveConsole"
+    "barHelper.startInteractiveConsole",
   );
   Utils.setupItem(
     BarItems.startWebServerItem,
     "🚁⌃s",
     "Start the web server",
-    "barHelper.startWebServer"
+    "barHelper.startWebServer",
   );
   Utils.setupItem(
     BarItems.formatCodeFileItem,
     "🎨 ⌃f",
     "format the file",
-    "barHelper.formatCodeFile"
+    "barHelper.formatCodeFile",
   );
   Utils.setupItem(
     BarItems.runDBMigrateItem,
     "⬆️ ⌃m",
     "db:migrate",
-    "barHelper.runDBMigrate"
+    "barHelper.runDBMigrate",
   );
   Utils.setupItem(
     BarItems.gitPushItem,
     "🚀⌃u",
     "git push --force-with-lease",
-    "barHelper.runGitPush"
+    "barHelper.runGitPush",
   );
   Utils.setupItem(
     BarItems.gitStatusItem,
     "💹 gst ⌃i",
     "git status",
-    "barHelper.runGitStatus"
+    "barHelper.runGitStatus",
   );
   Utils.setupItem(
     BarItems.gitCheckoutDevelopPullItem,
-    "⏬ develop && pull ⌃c",
+    "⏬ fetch > develop ⌃c",
     "git branch -d develop && git fetch && git checkout develop",
-    "barHelper.runGitCheckoutDevelopPull"
+    "barHelper.runGitCheckoutDevelopPull",
   );
 
   // Right side
@@ -69,12 +69,12 @@ export const setupItemBehaviors = () => {
     BarItems.gitRebaseContinueItem,
     "🏃 rebase:CONTINUE",
     "git add . && git rebase --continue.",
-    "barHelper.runGitRebaseContinue"
+    "barHelper.runGitRebaseContinue",
   );
   Utils.setupItem(
     BarItems.gitRebaseSkipItem,
     "👋 rebase:SKIP",
     "git rebase --skip.",
-    "barHelper.runGitRebaseSkip"
+    "barHelper.runGitRebaseSkip",
   );
 };
