@@ -46,6 +46,12 @@ export const setupItemBehaviors = () => {
     "barHelper.runDBMigrate",
   );
   Utils.setupItem(
+    BarItems.switchBetweenFileAndSpecItem,
+    "to spec ⌃t",
+    "Switch between file and spec",
+    "barHelper.switchBetweenFileAndSpec",
+  );
+  Utils.setupItem(
     BarItems.gitPushItem,
     "🚀⌃u",
     "git push --force-with-lease",

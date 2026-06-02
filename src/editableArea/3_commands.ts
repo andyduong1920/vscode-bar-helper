@@ -1,3 +1,4 @@
+import * as path from "path";
 import { commands, window, workspace } from "vscode";
 import * as FileCheckHelpers from "../fileCheckHelpers";
 import * as Utils from "../utils";
@@ -150,5 +151,44 @@ export const runGitRebaseSkipCommand = commands.registerCommand(
   "barHelper.runGitRebaseSkip",
   () => {
     Utils.sendToTerminal("g rebase --skip");
+  }
+);
+
+export const switchBetweenFileAndSpecCommand = commands.registerCommand(
+  "barHelper.switchBetweenFileAndSpec",
+  async () => {
+    const editor = window.activeTextEditor;
+    if (!editor) return;
+
+    const filePath = editor.document.fileName;
+    const relativePath = workspace.asRelativePath(filePath, false);
+    const parts = relativePath.split("/");
+    const fileName = parts[parts.length - 1];
+    const dirParts = parts.slice(1, -1); // drop first segment (e.g. "app") and filename
+
+    let globPattern: string;
+
+    if (FileCheckHelpers.isRubyTestFile(filePath)) {
+      const sourceFile = fileName.replace(/_spec\.rb$/, ".rb");
+      globPattern = dirParts.length > 0
+        ? `**/${dirParts.join("/")}/${sourceFile}`
+        : `**/${sourceFile}`;
+    } else if (FileCheckHelpers.isRubyFile(filePath)) {
+      const specFile = fileName.replace(/\.rb$/, "_spec.rb");
+      globPattern = dirParts.length > 0
+        ? `**/${dirParts.join("/")}/${specFile}`
+        : `**/${specFile}`;
+    } else {
+      return;
+    }
+
+    const files = await workspace.findFiles(globPattern, "**/node_modules/**", 5);
+    if (files.length === 0) {
+      window.showWarningMessage(`No matching file found for: ${path.basename(filePath)}`);
+      return;
+    }
+
+    const doc = await workspace.openTextDocument(files[0]);
+    await window.showTextDocument(doc);
   }
 );

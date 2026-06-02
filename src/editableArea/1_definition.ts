@@ -29,6 +29,10 @@ export const runDBRemigrateItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -7,
 );
+export const switchBetweenFileAndSpecItem = window.createStatusBarItem(
+  StatusBarAlignment.Left,
+  -8,
+);
 export const gitStatusItem = window.createStatusBarItem(
   StatusBarAlignment.Left,
   -9,

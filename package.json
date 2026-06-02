@@ -2,7 +2,7 @@
   "name": "bar-helper",
   "displayName": "Bar Helper",
   "description": "Run any command from the status bar.",
-  "version": "0.5.9",
+  "version": "0.6.0",
   "publisher": "andyduong1920",
   "repository": {
     "type": "git",
@@ -61,6 +61,11 @@
       {
         "key": "ctrl+c",
         "command": "barHelper.runGitCheckoutDevelopPull"
+      },
+      {
+        "key": "ctrl+t",
+        "command": "barHelper.switchBetweenFileAndSpec",
+        "when": "editorTextFocus"
       }
     ],
     "commands": [
@@ -111,6 +116,10 @@
       {
         "command": "barHelper.runGraphiteSubmit",
         "title": "11111: gt submit --stack"
+      },
+      {
+        "command": "barHelper.switchBetweenFileAndSpec",
+        "title": "11111: Switch between file and spec"
       }
     ]
   },
