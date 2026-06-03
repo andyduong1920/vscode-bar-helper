@@ -47,7 +47,7 @@ export const setupItemBehaviors = () => {
   );
   Utils.setupItem(
     BarItems.switchBetweenFileAndSpecItem,
-    "to spec ⌃t",
+    "to spec ⌃x",
     "Switch between file and spec",
     "barHelper.switchBetweenFileAndSpec",
   );
