@@ -63,3 +63,7 @@ export const graphiteSyncItem = window.createStatusBarItem(
   StatusBarAlignment.Right,
   5,
 );
+export const graphiteLogItem = window.createStatusBarItem(
+  StatusBarAlignment.Right,
+  6,
+);

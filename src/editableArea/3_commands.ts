@@ -133,6 +133,13 @@ export const runGraphiteSyncCommand = commands.registerCommand(
   }
 );
 
+export const runGraphiteLogCommand = commands.registerCommand(
+  "barHelper.runGraphiteLog",
+  () => {
+    Utils.sendToTerminal("gt ls");
+  }
+);
+
 export const runGraphiteSubmitCommand = commands.registerCommand(
   "barHelper.runGraphiteSubmit",
   () => {

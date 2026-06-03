@@ -77,6 +77,12 @@ export const setupItemBehaviors = () => {
     "barHelper.runGraphiteSync",
   );
   Utils.setupItem(
+    BarItems.graphiteLogItem,
+    "⛓️‍💥 gt ls",
+    "gt ls",
+    "barHelper.runGraphiteLog",
+  );
+  Utils.setupItem(
     BarItems.graphiteSubmitItem,
     "⏫ gt submit",
     "gt submit --stack",

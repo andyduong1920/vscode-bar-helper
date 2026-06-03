@@ -14,6 +14,7 @@ export const defaultShowItems = () => {
     BarItems.gitRebaseContinueItem,
     BarItems.gitRebaseSkipItem,
     BarItems.graphiteSyncItem,
+    BarItems.graphiteLogItem,
     BarItems.graphiteSubmitItem,
   ]);
 };
